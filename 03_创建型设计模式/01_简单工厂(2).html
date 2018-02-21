@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+var clothes =function(){
+    this.show = 0;
+};
+clothes.prototype = {
+    get:function(){
+        console.log(this.show);
+    },
+    set:function(num){
+        this.show = num;
+    }
+};
+var shoes =function(){
+    this.show = 0;
+};
+shoes.prototype = {
+    get:function(){
+        console.log(this.show);
+    },
+    set:function(num){
+        this.show = num;
+    }
+};
+var pants =function(){
+    this.show = 0;
+};
+pants.prototype = {
+    get:function(){
+        console.log(this.show);
+    },
+    set:function(num){
+        this.show = num;
+    }
+};
+
+var Factory=function(name){
+    switch (name) {
+        case 'clothes':
+            return new clothes();
+        case 'shoes':
+            return new shoes();
+        case 'pants':
+            return new pants();
+    }
+};
+
+var t = Factory('clothes');
+t.set(50);
+t.get();
+</script>
+</body>
+</html>

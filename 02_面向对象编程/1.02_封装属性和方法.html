@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    //闭包实现
+    var Book = function(id, bookname, price){
+        //私有属性
+        var num = 0;
+        //私有方法
+        function checkId(){}
+
+        //特权方法
+        this.getName = function (){};
+        this.getPrice = function (){};
+        this.setName = function (){};
+        this.setPrice = function (){};
+        //共有属性
+        this.id = id;
+        //共有发放
+        this.copy = function (){};
+        //构造器
+        this.setName(bookname);
+        this.setPrice(price);
+    };
+    //类静态共有属性(对象不能访问)
+    Book.isChineseBook = true;
+    //类静态共有方法(对象不能访问)
+    Book.resetTime = function(){};
+    //公有属性与公有方法
+    Book.prototype = {
+        isJsBook:true,
+        display: function(){}
+    };
+    var book = new Book('1002', 'javascript', 40);
+    console.log(book.num);
+    console.log(book.isJsBook);
+    console.log(book.id);
+    console.log(book.isChineseBook);
+    console.log(Book.isChineseBook);
+    Book.resetTime();
+</script>
+</body>
+</html>

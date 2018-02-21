@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var zhengti=function(){};
+    zhengti.prototype.kafei=function(){
+        console.log('kafei')
+    };
+    zhengti.prototype.niunai=function(){
+        console.log('kafei')
+    };
+    zhengti.prototype.cai=function(){
+        console.log('cai')
+    };
+    var guke=function(){};
+    guke.diancan=function(arr){
+        var t=new zhengti();
+        for(var i=0; i<arr.length; i++){
+            switch(arr[i]){
+                case 'kafei':
+                    t.kafei();
+                    break;
+                case 'niunai':
+                    t.niunai();
+                    break;
+                case 'cai':
+                    t.cai();
+                    break;
+            }
+        }
+    };
+    /*  顾客点一杯咖啡，加糖，加牛奶  */
+    guke.diancan(['kafei','niunai','cai'])
+
+</script>
+</body>
+</html>

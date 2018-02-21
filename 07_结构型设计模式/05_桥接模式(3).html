@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="../jquery.min.js"></script>
+    <title></title>
+</head>
+<body>
+<script>
+    //提取共同点
+    var changeColor = function (dom, color, bg) {
+        dom.style.color = color;
+        dom.style.background = bg;
+    };
+    //事件与业务之间的桥梁
+    var spans = document.getElementsByTagName('span');
+    span[0].onmouseover = function () {
+        changeColor(this, 'red', '#ddd');
+    };
+    span[0].onmouseout = function () {
+        changeColor(this, '#333', '#f5f5f5');
+    };
+    span[1].onmouseover = function () {
+        var dom = this.getElementsByName('strong')[0];
+        changeColor(dom, 'red', '#ddd');
+    };
+    span[1].onmouseout = function () {
+        var dom = this.getElementsByName('strong')[0];
+        changeColor(dom, '#333', '#f5f5f5');
+    };
+
+    var Speed = function (x, y) {
+        this.x = x;
+        this.y = y;
+    };
+    Speed.prototype.run = function () {
+        console.log('动起来')
+    };
+    var Color = function (clr) {
+        this.color = clr;
+    };
+    Color.prototype.draw = function () {
+        console.log('绘制')
+    };
+    var Shape = function (shp) {
+        this.shape = shp;
+    };
+    Shape.prototype.change = function () {
+        console.log('改变形状')
+    };
+    var Speek = function (spk) {
+        this.speek = spk;
+    };
+    Speek.prototype.say = function () {
+        console.log('书写')
+    };
+
+    //创建一个球类
+    var Ball = function (x, y , c) {
+        this.speed = new Speed(x, y);
+        this.color = new Color(c)
+    };
+    Ball.prototype.init = function () {
+        //运动
+        this.speed.run();
+        //着色
+        this.color.draw();
+    };
+    //创建精灵
+    var Spirite = function (x, y, c, s) {
+        this.speed = new Speed(x, y);
+        this.font = new Speek(c);
+        this.shape = new Shape(c);
+    };
+    Spirite.prototype.init = function () {
+        this.speed.run();
+        this.font.say();
+        //改变形状
+        this.shape.change()
+    }
+
+</script>
+</body>
+</html>

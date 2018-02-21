@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    //公用类
+    var E = function () {};
+    E.prototype.checkName = function (){};
+    E.prototype.checkEmail = function (){};
+    E.prototype.checkPassword = function (){};
+
+    var e = new E();
+    e.checkPassword();
+    //另一种写法
+    var F = function () {};
+    F.prototype = {
+        checkName : function (){},
+        checkEmail : function (){},
+        checkPassword : function (){}
+    };
+    var f = new F();
+    f.checkName();
+    f.checkEmail();
+    f.checkPassword();
+    //还可以这样
+    var G = function () {};
+    G.prototype = {
+        checkName : function (){
+            return this;
+        },
+        checkEmail : function (){
+            return this;
+        },
+        checkPassword : function (){
+            return this;
+        }
+    };
+    var g = new G();
+    g.checkName().checkEmail().checkPassword();
+</script>
+</body>
+</html>

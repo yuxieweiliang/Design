@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        Function.prototype.method=function(name,fn){
+            //this.prototype[name]=fn;加在原型上市错误的。
+            this.prototype=fn;
+        };
+        var Anim1=function(){
+            /*……*/
+        };
+        Anim1.method('start',function(){
+            /*……*/
+        });
+        Anim1.method('end',function(){
+            /*……*/
+        });
+
+        /*修改使其具有链式调用*/
+        Function.prototype.method=function(name,fn){
+            this[name]=fn;
+            return this;
+        };
+        var Anim2=function(){
+            /*……*/
+        };
+        Anim2.method('start',function(){
+            console.log("fdsa");
+            /*……*/
+            return this;
+        }).method('end',function(){
+            console.log("fdsa");
+            /*……*/
+            return this;
+        });
+        Anim2.start().end()
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

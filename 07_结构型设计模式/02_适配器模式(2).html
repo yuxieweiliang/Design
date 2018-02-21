@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input id="box" type="text" />
+<script>
+    //参数适配器
+    //var doSomeThing = function (name, title, age, color, size, prize) {};
+
+    var doSomeThing = function (obj) {
+        var _adapter = {
+            name : '雨夜清河',
+            title : '设计模式',
+            age : 24,
+            color : 'pink',
+            size : 100,
+            prize : 50
+        };
+        for (var i in _adapter) {
+            _adapter[i] = obj[i] || _adapter[i];
+        }
+        //或者extend(_adapter, obj) 注：此时可能会多添加属性。
+        // do things
+    };
+
+</script>
+
+</body>
+</html>

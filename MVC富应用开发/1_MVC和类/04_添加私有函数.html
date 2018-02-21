@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn">btn</button>
+<script src="../../jquery.min.js"></script>
+<script src="./04_添加私有函数.js"></script>
+<script>
+
+  var Person = new Class;
+
+  Person.extend({
+    find: function() {
+      return '1'
+    },
+    exists: function() {}
+  });
+
+  Person.include({
+    save: function(){},
+    destroy: function(){},
+    click: function() {
+      console.log(this);
+      // this.elem.click(this.proxy(this.click));
+    }
+  });
+
+  var Child = new Class(Person);
+
+  child = new Child();
+
+  $('#btn').click(child.proxy(child.click));
+
+
+</script>
+</body>
+</html>

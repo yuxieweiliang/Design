@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    var SuperClass = function (){
+        this.books = ['javascript','html','css'];
+    };
+    var SubClass = function(){};
+    SubClass.prototype = new SuperClass();
+    var instance1 = new SubClass();
+    var instance2 = new SubClass();
+    console.log(instance1.books);
+    console.log(instance2.books);
+    instance2.books.push('swift');
+    //通过prototype继承，子类共有一个父类，所以一个子类属性改变，会影响到其他子类。
+    console.log(instance1.books);
+    console.log(instance2.books);
+    //因为子类继承是父类的实例化，所以无法再次向父类传递参数
+
+</script>
+</body>
+</html>

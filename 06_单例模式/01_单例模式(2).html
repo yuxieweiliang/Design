@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //创建无数全局变量
+    var Mx = {
+        css:function(id, key, value){
+            this.g(id).style[key] = value;
+        },
+        go : function(id){
+            return document.getElementById(id)
+        },
+        get : function(){},
+        set : function(){},
+        on : function(){}
+    };
+    //管理命名空间，调用的时候模块分明
+    var Mm = {
+        dom : {
+            addclass : function(){},
+            append : function(){}
+        },
+        event : {
+            stopPropagation : function(){},
+            preventDefault : function(){}
+        },
+        string : {
+            encodeHtml : function(){}
+        }
+    };
+    Mm.dom.addclass();
+    Mm.dom.append();
+    Mm.event.stopPropagation();
+    Mm.event.preventDefault();
+    Mm.string.encodeHtml();
+    //创建小型代码库
+
+    var A = {
+        Util : {
+            util_method1 : function(){},
+            util_method2 : function(){}
+        },
+        Tool : {
+            tool_method1 : function(){},
+            tool_method2 : function(){}
+        },
+        Ajax : {
+            get : function(){},
+            post : function(){}
+        },
+        Other : {
+            //……
+        }
+    }
+
+
+</script>
+</body>
+</html>

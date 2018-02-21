@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    //克隆新对象
+
+    var prototypeExtend = function (){
+        //F：缓存类，为实例化新的类创建的临时对象
+        //args：传入的参数，每一个都是一个类将被拷贝的类
+        var F = function () {},
+            args = arguments,
+            i = 0,
+            len = args.length;
+        //遍历传入的个数
+        for (; i<len; i++){
+            //遍历每个类的属性
+            for(var j in args[i]){
+                //将每个类的属性都复制到临时类的原型上
+                F.prototype[j] = args[i][j];
+            }
+        }
+        //返回临时类的一个实例
+        return new F();
+    };
+    //将传入的方法执行一遍
+    var dose = function(doses){
+
+        for(var i in doses){
+            this[i] = doses[i];
+        }
+        return this;
+    };
+
+
+    var Swim = dose({
+            speed : 20,
+            swim : function(){
+                console.log('游泳速度' + this.speed);
+                return this;
+            }
+        }
+    );
+
+    var Run = dose({
+            run : function(speed){
+                console.log('游泳速度' + speed);
+                return this;
+            }
+        });
+
+    var Jump = dose({
+            jump : function(){
+                console.log('跳跃是硬伤！');
+                return this;
+            }
+        });
+    var penguin = prototypeExtend(Swim, Run, Jump);
+
+    penguin.swim()
+            .run(10)
+            .jump();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    //闭包实现
+    var Book = function(NewId, NewName, NewPrice){
+        //instanceof 检测某个对象是否是某个类的实例
+        if(this instanceof Book){
+            this.NewId = NewId;
+            this.NewName = NewName;
+            this.NewPrice = NewPrice;
+        }else{
+            return new Book(NewId, NewName, NewPrice);
+        }
+    };
+    var book = Book('1002', 'javascript', 40);
+    console.log(book.NewId);
+    console.log(book.NewName);
+    console.log(book.NewPrice);
+    console.log(book);
+    console.log(window.NewId);
+    console.log(window.NewName);
+    console.log(window.NewPrice);
+</script>
+</body>
+</html>

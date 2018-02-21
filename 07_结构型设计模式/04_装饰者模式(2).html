@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="../jquery.min.js"></script>
+    <title></title>
+</head>
+<body>
+<script>
+    var decorator = function (input, fn) {
+        //获取事件对象
+        var ipt = document.getElementById(input);
+        //判断是否绑定事件
+        if(typeof ipt.onclick === 'function'){
+            //如果已经绑定，则调用原来的方法
+            var oldClickFn = ipt.onclick;
+            ipt.onclick = function(){
+                oldClickFn();
+                //然后在执行后面的方法
+                fn();
+            }
+        }else{
+            //如果没有，则执行后面的方法
+            ipt.onclick = fn;
+        }
+    };
+    //电话
+    decorator('tel_input', function(){
+        document.getElementById('tel_demo_text').style.display = 'none';
+    });
+    //姓名
+    decorator('name_input', function(){
+        document.getElementById('name_demo_text').style.display = 'none';
+    });
+    //地址
+    decorator('adress_input', function(){
+        document.getElementById('adress_demo_text').style.display = 'none';
+    });
+</script>
+</body>
+</html>

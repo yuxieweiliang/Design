@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var liucheng=function(){};
+    liucheng.prototype.start=function(){
+        console.log('游戏开始');
+    };
+    liucheng.prototype.loading=function(){
+        console.log('游戏正在加载中……');
+    };
+    liucheng.prototype.end=function(){
+        console.log('开始游戏');
+    };
+    var mogu=function(){
+        console.log('小明是上帝的子类');
+        liucheng.call(this);
+    };
+    mogu.prototype=new liucheng();
+    mogu.prototype.start=function(){
+        console.log('开始动画');
+    };
+
+    var d=new mogu();
+    d.start();
+</script>
+</body>
+</html>

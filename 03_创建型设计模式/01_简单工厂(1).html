@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //学习工厂方式之前，我们这么写
+    var LoginAlert = function(text){
+        this.content = text;
+    };
+    LoginAlert.prototype.show = function (){
+        //显示弹出框
+    };
+    var userNameAlert = new Location('用户名不能超过16个字');
+    userNameAlert.show();
+
+    var passwordAlert = new Location('输入密码不正确');
+    passwordAlert.show();
+
+    //然而如果变更需求，需要加一个按钮，
+    //然后就需要重新建一个类。
+
+
+    var LoginConfirm = function(text){
+        this.content = text;
+    };
+    LoginAlert.prototype.show = function (){
+        //显示弹出框
+    };
+    var userNameConfirm = new LoginConfirm('用户名不能超过16个字');
+    userNameConfirm.show();
+
+    var passwordConfirm = new LoginConfirm('输入密码不正确');
+    passwordConfirm.show();
+
+    //然而，需要减少一个东西。
+    //公用类就不能够满足需求了。
+
+    var LoginPrompt = function(text){
+        this.content = text;
+    };
+    LoginAlert.prototype.show = function (){
+        //显示弹出框
+    };
+    var userNamePrompt = new LoginPrompt('用户名不能超过16个字');
+    userNamePrompt.show();
+
+    var passwordPrompt = new LoginPrompt('输入密码不正确');
+    passwordPrompt.show();
+
+
+
+</script>
+</body>
+</html>

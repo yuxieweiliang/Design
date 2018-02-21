@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //延迟创建的单例对象
+    var LazySingle = (function () {
+        //单例实例引用
+        var _instance = null;
+        function Single () {
+            //属性，方法
+            return {
+                publicMethod : function () {
+                    console.log('aaaa')
+                },
+                publicProperty : function () {}
+            }
+        }
+        //获取单例对象接口
+        return function () {
+            if(!_instance){
+                _instance = Single();
+            }
+            return _instance;
+        }
+    })();
+
+    LazySingle().publicMethod()
+
+
+</script>
+</body>
+</html>

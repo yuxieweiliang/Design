@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="./01_创建类.js"></script>
+<script>
+
+  var Person = new Class;
+
+  Person.extend({
+    find: function() {
+      return '1'
+    },
+    exists: function() {}
+  });
+
+  Person.include({
+    save: function(){},
+    destroy: function(){}
+  });
+
+  person = new Person();
+
+
+  console.log(person);
+
+</script>
+</body>
+</html>

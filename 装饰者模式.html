@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input id="input" type="text">
+<script>
+var input = document.getElementById('input');
+
+input.addEventListener('input', function(e) {
+  var val = this.value.replace(/([^0-9]|-)/g, '');
+  var vals = val.split('');
+  if(vals.length > 4) {
+    vals.splice(4,0, '-');
+  }
+  if(vals.length > 7) {
+    vals.splice(7,0, '-');
+  }
+  vals.splice(10);
+  this.value = vals.join('');
+});
+
+
+</script>
+</body>
+</html>

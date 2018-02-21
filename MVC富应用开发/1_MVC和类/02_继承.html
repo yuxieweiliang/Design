@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="./02_继承.js"></script>
+<script>
+
+  var Person = new Class;
+
+  Person.extend({
+    find: function() {
+      return '1'
+    },
+    exists: function() {}
+  });
+
+  Person.include({
+    save: function(){},
+    destroy: function(){}
+  });
+
+
+  var Child = new Class(Person);
+
+  child = new Child();
+
+
+  console.log(child);
+
+</script>
+</body>
+</html>

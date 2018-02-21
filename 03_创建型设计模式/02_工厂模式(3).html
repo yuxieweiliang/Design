@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //安全模式类//防止用户忘记new
+    var Demo = function (){
+        if(!(this instanceof Demo)){
+            return new Demo();
+        }
+    };
+    Demo.prototype = {
+        show: function(){
+            console.log('获取成功过')
+        }
+    };
+    var d = new Demo();//获取成功过
+    d.show();
+    var d = Demo();//获取成功过
+    d.show();
+</script>
+</body>
+</html>

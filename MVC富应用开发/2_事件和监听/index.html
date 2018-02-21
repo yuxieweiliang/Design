@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn">btn</button>
+<script src="../../jquery.min.js"></script>
+<script src="./01_发布者模式.js"></script>
+<script>
+
+var ABC = {
+  sub: 'ABC:sub'
+};
+
+PubSub.subscribe(ABC.sub, function(aaa) {
+  console.log(aaa)
+});
+
+PubSub.publish(ABC.sub, 'bbbb')
+
+</script>
+</body>
+</html>

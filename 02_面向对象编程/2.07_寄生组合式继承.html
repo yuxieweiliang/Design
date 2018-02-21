@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+
+    function inheritObject (o){
+        function F(){}
+        F.prototype = o;
+        return new F();
+    }
+    //寄生式继承原型,
+    function inheritPrototype (subClass, superClass){
+        //复制父类原型副本保存在变量中
+        var p = inheritObject(superClass.prototype);
+        //修复重写子类原型导致子类constructor属性被修改，指向错误问题
+        p.constructor = subClass;
+        //设置子类原型为父类。
+        subClass.prototype = p;
+    }
+
+    var SurperClass = function(name) {
+        this.name = name;
+        this.colors = ['red','blue','yellow']
+    };
+    SurperClass.prototype.getName = function (){
+        console.log(this.name)
+    };
+    var SubClass = function (name, time) {
+        SurperClass.call(this,name);
+        this.time = time;
+    };
+
+    inheritPrototype(SubClass,SurperClass);
+    SubClass.prototype.getTime = function () {
+        console.log(this.name)
+    };
+
+    var instance1 = new SubClass('js book', 1023);
+    var instance2 = new SubClass('css book', 2031);
+
+    instance1.colors.push('black');
+    console.log(instance1.colors);//["red", "blue", "yellow", "black"]
+    console.log(instance2.colors);//"red", "blue", "yellow"]
+    instance1.getName();//js book
+    instance2.getTime();//ss book
+
+
+
+</script>
+</body>
+</html>

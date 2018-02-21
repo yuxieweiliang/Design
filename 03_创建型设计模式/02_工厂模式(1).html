@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //JAVA
+    var java = function(content){
+        this.content = content;
+        (function (content) {
+            var div = document.createElement('div');
+            div.innerHTML = content;
+            div.style = 'green';
+            document.getElementById('container').appendChild(div)
+        })(content);
+    };
+    //PHP
+    var PHP = function(content){
+        this.content = content;
+        (function (content) {
+            var div = document.createElement('div');
+            div.innerHTML = content;
+            div.style = 'green';
+            document.getElementById('container').appendChild(div)
+        })(content);
+    };
+
+    //javaScript
+    var javaScript = function(content){
+        this.content = content;
+        (function (content) {
+            var div = document.createElement('div');
+            div.innerHTML = content;
+            div.style = 'green';
+            document.getElementById('container').appendChild(div)
+        })(content);
+    };
+    //Factory
+    var Factory = function(type,content){
+        switch (type) {
+            case 'JAVA':
+                return new java(content);
+            case 'PHP':
+                return new PHP(content);
+            case 'JAVASCRIPT':
+                return new javaScript(content);
+        }
+    };
+
+</script>
+</body>
+</html>

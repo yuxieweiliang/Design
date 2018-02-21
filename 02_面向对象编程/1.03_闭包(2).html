@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    //闭包实现
+    var Book = (function(){
+        //静态私有属性
+        var bookNum = 0;
+        //静态私有方法
+        function checkBook(name){}
+        //创建类
+        function _book(NewId, NewName, NewPrice){
+            //私有属性
+            var name,price;
+            //私有方法
+            function checkId(id){}
+
+            //特权方法
+            this.getName = function (){};
+            this.getPrice = function (){};
+            this.setName = function (){};
+            this.setPrice = function (){};
+            //共有属性
+            this.id = NewId;
+            //共有发放
+            this.copy = function (){};
+            bookNum++;
+            if(bookNum > 100){
+                throw new Error('我们仅出版100本书')
+            }
+            //构造器
+            this.setName(name);
+            this.setPrice(price);
+        }
+        _book.prototype = {
+            //静态公有属性
+            isJsBook:true,
+            //静态公有方法
+            display: function(){}
+        };
+        return _book;
+    })();
+    var book = new Book('1002', 'javascript', 40);
+    console.log(book.bookNum);
+    console.log(book.isJsBook);
+    console.log(book.id);
+    console.log(book.isChineseBook);
+    console.log(Book.isChineseBook);
+</script>
+</body>
+</html>

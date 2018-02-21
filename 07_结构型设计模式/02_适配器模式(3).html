@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input id="box" type="text" />
+<script>
+    //参数适配器
+    var arr = ['Javascript', 'book', '设计模式', '2016年5月21日', '雨歇微凉'];
+
+    var obj = {
+        name : '',
+        type : '',
+        title : '',
+        time : '',
+        author : ''
+    };
+    //Adapter [ə'dæptə]	适配器
+    var arrToObjAdapter = function () {
+        return {
+            name : arr[0],
+            type : arr[1],
+            title : arr[2],
+            time : arr[3],
+            author : arr[4]
+        }
+    };
+    var adapterData = arrToObjAdapter(arr);
+    console.log(adapterData);
+    //{
+    //  author: "雨歇微凉"
+    //  name: "Javascript"
+    //  time: "2016年5月21日"
+    //  title: "设计模式"
+    //  type: "book"
+    // }
+</script>
+
+</body>
+</html>

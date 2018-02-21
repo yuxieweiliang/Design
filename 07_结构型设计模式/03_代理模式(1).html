@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="../jquery.min.js"></script>
+    <title></title>
+</head>
+<body>
+<input id="box" type="text" />
+<script>
+    //无法获取图片上传模块
+    $.ajax({
+        url : 'http://upload.xx.com/01.img',
+        success : function(data){
+            //无法获取数据
+        }
+    });
+
+    //XMLHttpRequest cannot load http://upload.xx.com/01.img. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:63342' is therefore not allowed access.
+
+
+</script>
+
+</body>
+</html>

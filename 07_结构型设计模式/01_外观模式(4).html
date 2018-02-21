@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input id="box" type="text" />
+<script>
+    //获取事件对象
+    var A = {
+        g : function(id){
+            return document.getElementById(id)
+        },
+        css:function(id, key, value){
+            this.g(id).style[key] = value;
+        },
+        attr : function(id ,key, value){
+            document.getElementById(id)[key] = value;
+        },
+        val : function(id, html){
+            document.getElementById(id).value = html;
+        },
+        on : function(id, type, fn){
+            document.getElementById(id)['on' + type] = fn;
+        }
+    };
+
+    A.css('box', 'background', 'red');
+    A.attr('box', 'className', 'box');
+    A.val('box', 'zheshixinde');
+    A.on('box', 'click', function(){
+        A.css('box', 'width', '300px');
+    });
+
+
+
+</script>
+
+</body>
+</html>

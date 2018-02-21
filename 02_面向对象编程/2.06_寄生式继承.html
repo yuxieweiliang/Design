@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+
+    function inheritObject (o){
+        function F(){}
+        F.prototype = o;
+        return new F();
+    }
+    var book = {
+        name: 'js book',
+        alikeBook:['css book','html book']
+    };
+
+    function createBook (obj,book){
+        var o = new inheritObject(obj);
+        o.getName = function(){
+            console.log(obj.name);
+        };
+        o.setName = function(){
+            obj.alikeBook.push(book);
+        };
+        o.getAlikeBook = function(){
+            console.log(obj.alikeBook);
+        };
+        return o ;
+    }
+    createBook(book).getName();
+    createBook(book,'xml book').setName();
+    createBook(book).getAlikeBook();
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input id="myinput" type="text" />
+<script>
+    //兼容方式
+    //外观模式实现
+    var addEvent = function (dom, type, fn) {
+        //对于支持 DOM 2级事件的浏览器
+        if (dom.addEventListener) {
+            dom.addEventListener(type, fn, false);
+            //对于不支持的
+        } else if (dom.attachEvent) {
+            dom.attachEvent('on' + type, fn);
+        } else {
+            dom['on' + type] = fn;
+        }
+    };
+
+
+    var myInput = document.getElementById('myinput');
+    addEvent(myInput, 'click', function(){
+        console.log('绑定的第一个事件')
+    });
+    addEvent(myInput, 'click', function(){
+        console.log('绑定的第二个事件')
+    });
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="../jquery.min.js"></script>
+    <title></title>
+</head>
+<body>
+<input id="box" type="text" />
+<script>
+    //出于浏览器安全，不同域名下的页面是不可以直接调用的。
+
+    var Count = (function () {
+        var _img = new Image();
+        return function (param) {
+            var str = 'http://www.count.com/a.gif?';
+            for(var i in param) {
+                str += i + '=' + param[i];
+            }
+            _img.src = str;
+            console.log(_img)
+        }
+    })();
+    Count({num: 10});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="../jquery.min.js"></script>
+    <title></title>
+</head>
+<body>
+<script>
+    /*
+    原有代码
+    var telIpt = document.getElementById('tel_input');
+    var telWarnText = document.getElementById('tel_warn_text');
+    input.onclick = function (){
+        telWarnText.style.display = 'inline-block';
+    };
+    */
+    var telIpt = document.getElementById('tel_input');
+    var telWarnText = document.getElementById('tel_warn_text');
+    //添加代码
+    var telDemoText = document.getElementById('tel_demo_text');
+    input.onclick = function (){
+        telWarnText.style.display = 'inline-block';
+        //添加文字消失代码
+        telDemoText.style.display = 'none';
+    };
+</script>
+</body>
+</html>

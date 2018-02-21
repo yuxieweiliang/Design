@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input id="box" type="text" />
+<script>
+    //服务器数据适配
+    //1111
+    var ajaxAdapter1 = function (data) {
+        return [data['key1'], data['key2'], data['key3']]
+    };
+    //222不知道这个和上面有什么不同
+    var ajaxAdapter2 = function (data) {
+    var arr = [];
+    for (var key in data){
+        arr.push(data[key])
+    }
+    return arr;
+    };
+    //适配
+    $.ajax({
+        url: 'someAddress.php',
+        success : function(data, status) {
+            if(data) {
+                doSomeThing(ajaxAdapter(data));
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>

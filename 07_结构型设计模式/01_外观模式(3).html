@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input id="myinput" type="text" />
+<script>
+    //获取事件对象
+    var getEvent = function (event) {
+        //标准浏览器返回event,ie下window.event
+        return event || window.event;
+    };
+    var getTarget = function (event) {
+        var e = getEvent(event);
+        return e.target || e.srcElement;
+    };
+    var preventDefault = function (event) {
+        var e = getEvent(event);
+        if(e.preventDefault){
+            e.preventDefault();
+        } else {
+            e.returnValue = false;
+        }
+    };
+    //点击document的时候，阻止事件冒泡
+    document.onclick = function(e) {
+        //阻止默认事件
+        preventDefault(e);
+        //获取事件源目标对象
+        if(getTarget(e) !== document.getElementById('myinput')){
+            //只有在执行以下函数时不执行。
+            hideInputSug()
+        }
+    };
+    var hideInputSug = function(){
+        console.log('hide')
+    }
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+<script>
+  //函数的祖先（可以看一下prototype.js）对js原生对象进行了扩展
+  //然而并不建议这么做，这样会污染原生对象，所有人的函数都会被污染。
+  Function.prototype.checkEmail = function () {};
+  var h = function () {};
+  h.checkEmail();
+
+
+  //抽象出一个统一的添加方法的添加功能。
+  Function.prototype.addMethod = function (name, fn){
+    this[name] = fn;
+  };
+  var methods = function () {};
+  methods.addMethod('checkName',function(){});
+
+
+
+  //或者
+  var method = new Function();
+  method.addMethod('checkName', function(){});
+  method.addMethod('checkEmail', function(){});
+  method.addMethod('checkPassword', function(){});
+  method.checkName();
+  method.checkPassword();
+
+
+
+
+  //链式调用
+  Function.prototype.addMethod = function (name,fn){
+    this[name] = fn;
+    return this;
+  };
+  var I = new Function();
+  I.addMethod('checkName', function() {
+    return this;
+  }).addMethod('checkEmail', function() {
+    return this;
+  }).addMethod('checkPassword', function() {
+    return this;
+  });
+  I.checkName().checkPassword();
+
+
+
+
+  //换一种是用发放
+  Function.prototype.method = function (name,fn){
+    this.prototype[name] = fn;
+    return this;
+  };
+  var J = new Function();
+  J.addMethod('checkName', function(){
+    return this;
+  }).addMethod('checkEmail', function(){
+    return this;
+  }).addMethod('checkPassword', function(){
+    return this;
+  });
+  var j = new J();
+  j.checkName().checkEmail().checkPassword();
+
+
+</script>
+</body>
+</html>

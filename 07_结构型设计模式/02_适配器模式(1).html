@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input id="box" type="text" />
+<script>
+    //获取事件对象
+    var A = A|| {};
+
+    A.g = function (id){
+        return document.getElementById(id);
+    };
+    A.on = function (id, type, fn) {
+        var dom = typeof id ==='string' ? this.g(id) : id;
+        if(dom.addEventListener){
+            dom.addEventListener(type, fn, false);
+        }else if(dom.attachEvent){
+            dom.attachEvent('on' + type, fn);
+        }else{
+            dom['on' + type] = fn;
+        }
+    };
+
+    A.on(window, 'load', function(){
+        A.on('mybutton', 'click', function(){
+            //do something
+        })
+    });
+
+    //适配两个框架，和JQ
+    A.g = function(id) {
+        return $(id).get(0)
+    };
+
+    A.on = function(id){
+        var dom = typeof id === 'string'  ? $('#' + id) : $(id)
+    }
+
+
+</script>
+
+</body>
+</html>

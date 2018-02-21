@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    var Add = function () {
+        var zero = function () {
+            return 10;
+        };
+        var noe = function (num) {
+            return 10 + num;
+        };
+        var two = function (num1, num2) {
+            return num1 + num2;
+        };
+
+        this.add = function () {
+            var arg = arguments,
+                    len = arg.length;
+            switch (len) {
+                case 0 :
+                    return zero();
+                case 1:
+                    return noe(arg[0]);
+                case 2:
+                    return two(arg[0], arg[1]);
+            }
+
+        }
+    };
+
+    var A = new Add();
+    console.log(A.add());
+    console.log(A.add(1));
+    console.log(A.add(1,2));
+
+
+</script>
+</body>
+</html>

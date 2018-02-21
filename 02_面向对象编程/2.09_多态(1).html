@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+
+    var add = function () {
+        var arg = arguments,
+                len = arg.length;
+        switch (len) {
+            case 0 :
+                return 10;
+            case 1:
+                return 10 + arg[0];
+            case 2:
+                return arg[0] + arg[1];
+        }
+    };
+
+    console.log(add());
+    console.log(add(1));
+    console.log(add(1,4));
+
+
+</script>
+</body>
+</html>

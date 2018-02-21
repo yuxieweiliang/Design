@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="container"></div>
+<script>
+    var Car = function(){};
+    Car.prototype = {
+        getPrice : function(){
+            return new Error('抽象方法不能使用！')
+        },
+        setPrice : function () {
+            return new Error('抽象方法不能使用！')
+        }
+    }
+</script>
+</body>
+</html>

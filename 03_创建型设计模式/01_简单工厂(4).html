@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+var createPop = function (type, text) {
+    var o = new Object();
+    o.content = text;
+    o.show = function (){
+        console.log('显示弹框');
+    };
+    if(type = 'alert'){
+        //警告框差异部分
+    }
+    if(type = 'prompt'){
+        //提示框差异部分
+    }
+    if(type = 'confirm'){
+        //确认框差异部分
+    }
+    return o;
+};
+    var userNameAlert = createPop('alert',  '用户名不能超过16个字');
+
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    //函数定义
+    //定了了多个全局变量
+    function checkName(){}
+    function checkEmail(){}
+    function checkPassword(){}
+    //函数的另一种形式
+    //等同于
+    var checkName = function (){};
+    var checkEmail = function (){};
+    var checkPassword = function (){};
+    //用对象收编变量
+    //只创建一个全局变量，将函数变成方法
+    var A= {
+        checkName:function (){},
+        checkEmail:function (){},
+        checkPassword:function (){}
+    };
+    //对象的另一种形式
+    var B = function () {};
+    B.checkName = function (){};
+    B.checkEmail = function (){};
+    B.checkPassword = function (){};
+    //真假对象
+    var C = function () {
+        return {
+            checkName:function (){},
+            checkEmail:function (){},
+            checkPassword:function (){}
+        }
+    };
+    var c = C();
+    c.checkName();
+    //类
+    var D = function () {
+        this.checkName = function (){};
+        this.checkEmail = function (){};
+        this.checkPassword = function (){};
+    };
+    var d = new D();
+    d.checkEmail();
+
+</script>
+</body>
+</html>

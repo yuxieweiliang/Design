@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #view {
+      width: 500px;
+      height: 500px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+<div id="view"></div>
+<script src="../jquery.min.js"></script>
+<script>
+  var exports = this;
+  (function() {
+    var mod = {};
+    mod.create = function(include) {
+      var result = function() {
+        this.init.apply(this, arguments)
+      };
+
+      result.fn = result.prototype;
+      result.fn.init = function() {};
+
+      result.proxy = function(func) {return $.proxy(func, this);};
+      result.fn.proxy = result.proxy;
+
+      result.include = function(ob) { $.extend(this.fn, ob)};
+      result.extend = function(ob) { $.extend(this, ob)};
+      if(include) result.include(include);
+
+      return result;
+    };
+    exports.Controller = mod;
+  })(jQuery);
+  jQuery(function($) {
+    var ToggleView = Controller.create({
+      init: function(view) {
+        this.view = $(view);
+        this.view.mouseover(this.proxy(this.toggleClass), true);
+        this.view.mouseout(this.proxy(this.toggleClass), false);
+        this.toggleClass = function(e) {
+          this.view.toggleClass('over', e.data);
+        }
+      }
+    });
+    new ToggleView('#view')
+  })
+</script>
+</body>
+</html>

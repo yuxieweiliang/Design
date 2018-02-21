@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    //声明父类
+    var SuperClass = function (){
+        this.superValue = true;
+    };
+    //为父类添加公共方法
+    SuperClass.prototype.getSuperValue = function(){
+        return this.superValue;
+    };
+    //声明子类
+    var SubClass = function(){
+        this.subValue = false;
+    };
+    //继承父类
+    SubClass.prototype = new SuperClass();
+    //为子类添加公共方法
+    SubClass.prototype.getSubValue = function(){
+        return this.subValue;
+    };
+
+    var instance = new SubClass();
+    console.log(instance.getSubValue());
+    console.log(instance.getSuperValue());
+
+
+    console.log(instance instanceof SubClass);
+    console.log(instance instanceof SuperClass);
+    //判断前面实例是不是后面类(对象)的实例，并不表示继承。
+    console.log(SubClass instanceof SuperClass);
+    //SuperClass类赋予了SubClass类的原型prototype。
+    console.log(SubClass.prototype instanceof SuperClass);
+    //我们创建的所有对象，都是Object的实例
+    console.log(instance instanceof Object);
+</script>
+</body>
+</html>

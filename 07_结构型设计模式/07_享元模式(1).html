@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="../jquery.min.js"></script>
+    <title></title>
+</head>
+<body>
+<script>
+    //创建享元类
+    var Flyweight = function () {
+        //缓存数据，创建的元素
+        var created = [];
+        //创建一个新闻类包装容器
+        var creat = function () {
+            var dom = document.createElement('div');
+            //将包装容器插入新闻列表容器中
+            document.getElementById('container').appendChild(dom);
+            //缓存新元素
+            created.push(dom);
+            //返回新创建的元素
+            return dom;
+        };
+        return {
+            //获取新元素
+            getDiv : function () {
+                //如果小于5，则创建
+                if(created.length < 5){
+                    return creat();
+                }else{
+                    //获取第一个元素，插入最后
+                    //shift() 方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。
+                    //也就是说，每执行一次，就会把最前面的一个删除，并且把他插入到数组的最后面。
+                    //执行五次正好删除前面五条，最前面的就变成了五个新元素。
+                    var div = created.shift();
+                    created.push(div);
+                    return div;
+                }
+            }
+        }
+    };
+
+    var paper = 0,
+        num = 5,
+        len = article.length;
+    //添加五条新闻
+    for (var i=0; i<5; i++){
+        if(article[i]){
+            //通过享元类写入页面
+            Flyweight.getDiv().innerHTML = article[i];
+        }
+    }
+
+    //绑定事件
+    document.getElementById('next_page').onclick = function () {
+        //如果新闻内容不足五条则返回
+        if(article.length < 5) {
+            return;
+        }
+        var n = ++paper * num % len ,
+            j = 0;
+        //插入五条新闻
+        for(; j<5; j++){
+            //如果存在第J+1条，则插入
+            if(article[n+j]){
+                Flyweight.getDiv().innerHTML = article[n+j];
+            }else if(article[n+j-len]){
+                //否则插入起始位置第n+j-len条
+                Flyweight.getDiv().innerHTML = article[n+j-len]
+            }else{
+                //如果都不存在
+                Flyweight.getDiv().innerHTML = ''
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>
