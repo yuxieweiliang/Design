@@ -1,7 +1,7 @@
 
-(function(exports) {
+var Class = (function(exports) {
 
-  var Class = function(parent) {
+  return function(parent) {
     var klass = function() {
       this.init.apply(this, arguments);
     };
@@ -33,6 +33,7 @@
     // 给类添加属性 是属性及属性方法
     klass.extend = function(obj) {
       var extended = obj.extended;
+
       for(var i in obj) {
         klass[i] = obj[i];
       }
@@ -42,9 +43,14 @@
     // 给实例添加属性 也就是原型上的方法
     klass.include = function(obj) {
       var included = obj.included;
+      // delete klass.prototype.__proto__.parent
+      // delete klass.prototype.__proto__.proxy
+
       for(var i in obj) {
-        klass.fn[i] = obj[i];
+          klass.fn[i] = obj[i];
+        // delete klass.prototype.__proto__.init
       }
+
       if(included) included(klass)
 
     };

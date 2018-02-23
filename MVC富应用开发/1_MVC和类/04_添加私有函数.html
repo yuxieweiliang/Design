@@ -6,7 +6,7 @@
 </head>
 <body>
 <button id="btn">btn</button>
-<script src="../../jquery.min.js"></script>
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 <script src="./04_添加私有函数.js"></script>
 <script>
 
@@ -20,17 +20,27 @@
   });
 
   Person.include({
+    init() {
+      this.abc = 'abc'
+    },
     save: function(){},
     destroy: function(){},
     click: function() {
-      console.log(this);
       // this.elem.click(this.proxy(this.click));
     }
   });
 
-  var Child = new Class(Person);
+  var abc = new Person()
+  console.log(abc)
 
+  let Child = new Class(Person);
+  Child.include({
+    init() {
+      this.obj = 'obj'
+    }
+  })
   child = new Child();
+  console.log(child)
 
   $('#btn').click(child.proxy(child.click));
 
