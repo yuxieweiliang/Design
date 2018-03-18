@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn">btn</button>
+<!--<script src="../../jquery.min.js"></script>-->
+<script>
+
+  (function(exports) {
+
+    exports.Class = function(parent) {
+      var klass = function() {
+        this.init.apply(this, arguments);
+      };
+
+      if(parent) {
+        var subclass = function() {};
+        subclass.prototype = parent.prototype;
+        klass.prototype = new subclass;
+      }
+
+      klass.prototype.init = function() {};
+      // 定义prototype别名
+      klass.fn = klass.prototype;
+
+      // 添加一个委托函数，更改函数的上下文。
+      klass.proxy = function(func) {
+        var _this = this;
+        return(function() {
+          return func.apply(_this, arguments)
+        })
+      };
+      klass.fn.proxy = klass.proxy;
+
+      // 定义类的别名
+      klass.fn.parent = klass;
+
+      klass._super = klass.__proto__;
+
+      // 给类添加属性 是属性及属性方法
+      klass.extend = function(obj) {
+        var extended = obj.extended;
+        for(var i in obj) {
+          klass[i] = obj[i];
+        }
+        if(extended) extended(klass)
+      };
+
+      // 给实例添加属性 也就是原型上的方法
+      klass.include = function(obj) {
+        var included = obj.included;
+        for(var i in obj) {
+          klass.fn[i] = obj[i];
+        }
+        if(included) included(klass)
+
+      };
+
+      // 给实例添加属性 也就是原型上的方法
+      klass.create = function(obj) {
+        var createApi = obj.createApi;
+
+        // 创建一个函数保存一下当前状态。
+        var create = function(key, i, func) {
+
+          if(typeof func === 'function') {
+
+            klass.fn[key][i] = function() {
+
+              return func.apply(klass.fn, arguments);
+            };
+          } else {
+
+            klass.fn[key][i] = func;
+          }
+        };
+
+        // 循环obj， 将所有的东西加载到原型上
+        for(var key in obj) {
+
+          klass.fn[key] = klass.fn[key] || {};
+
+          for(var i in obj[key]) {
+            create(key, i, obj[key][i])
+
+
+          }
+        }
+        if(createApi) createApi(klass)
+
+      };
+
+
+      klass.fn.setData = function(obj) {
+        klass.fn.data = klass.fn.data || {};
+
+        for(var key in obj) {
+
+          klass.fn.data[key] = obj[key];
+        }
+        console.log(klass.fn);
+      };
+      return klass;
+    };
+  })(window);
+  var Person = new Class;
+
+
+  function getUser() {
+    console.log(this)
+  }
+
+
+  Person.extend({
+    find: function() {
+      return '1'
+    },
+    exists: function() {}
+  });
+
+  Person.include({
+    save: function(){},
+    destroy: function(){},
+    click: function() {
+      console.log(this);
+      // this.elem.click(this.proxy(this.click));
+    }
+  });
+  Person.create({
+    api: {
+      getUser: getUser
+    },
+    config: {
+      http: 'http://www.baidu.com'
+    }
+  });
+  Person.create({
+    method: {
+      toString: function(){
+        console.log('toString')
+      }
+    }
+  });
+  var Child = new Class(Person);
+
+
+
+  Child.include({
+    init: function(){
+      this.setData({
+        a: 'a',
+        b: 'b'
+      });
+      this.method.toString();
+      this.api.getUser();
+
+      console.log(this)
+    }
+  });
+
+
+  child = new Child();
+
+  //  $('#btn').click(child.proxy(child.click));
+
+
+
+  var skate = function() {
+    this.new = function() {
+      console.log('-------')
+    }
+  }
+
+  skate.start = function() {
+    console.log('------3333-')
+
+  };
+
+  skate.start()
+  console.log()
+
+  var num = new skate();
+  num.new();
+  // num.start() ——》 num.start is not a function
+  console.log(num)
+
+
+  var ele = {
+    length: 0,
+    add: function(name) {
+      Array.prototype.push.call(this, name)
+    },
+    gitter: function(str) {
+      this.add(document.getElementById(str))
+    }
+  };
+  ele.gitter('btn');
+  console.log(ele[0])
+
+
+
+  Function.bind = function() {
+    var fn = this, args = Array.prototype.slice.call(arguments),
+      object = args.shift();
+    console.log(object);
+    console.log(Array.prototype.slice.call(arguments));
+
+    return function() {
+      return fn.apply(object,
+      args.concat(Array.prototype.slice.call(arguments)));
+    }
+  };
+
+  var myObj = {};
+
+  var func = function() {
+    return this === myObj;
+  };
+
+  var funcToo = func.bind(myObj);
+  funcToo()
+</script>
+</body>
+</html>

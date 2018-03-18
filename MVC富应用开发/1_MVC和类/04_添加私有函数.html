@@ -6,11 +6,17 @@
 </head>
 <body>
 <button id="btn">btn</button>
-<script src="../../jquery.min.js"></script>
+<!--<script src="../../jquery.min.js"></script>-->
 <script src="./04_添加私有函数.js"></script>
 <script>
 
   var Person = new Class;
+
+
+  function getUser() {
+    console.log(this)
+  }
+
 
   Person.extend({
     find: function() {
@@ -27,12 +33,42 @@
       // this.elem.click(this.proxy(this.click));
     }
   });
-
+  Person.create({
+    api: {
+      getUser: getUser
+    },
+    config: {
+      http: 'http://www.baidu.com'
+    }
+  });
+  Person.create({
+    method: {
+      toString: function(){
+        console.log('toString')
+      }
+    }
+  });
   var Child = new Class(Person);
+
+
+
+  Child.include({
+    init: function(){
+      this.setData({
+        a: 'a',
+        b: 'b'
+      });
+      this.method.toString();
+      this.api.getUser();
+
+      console.log(this)
+    }
+  });
+
 
   child = new Child();
 
-  $('#btn').click(child.proxy(child.click));
+  //  $('#btn').click(child.proxy(child.click));
 
 
 </script>

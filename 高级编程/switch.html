@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  // 使用表达式
+  switch('hello word') {
+    case 'hello ' + 'word' :
+      console.log('message his find');
+      break;
+    case 'goodbye' :
+      console.log('not find');
+      break;
+    default:
+      console.log('anyone is find')
+  }
+
+
+  // 使用判断
+  var num = 55;
+  switch(true) {
+    case num < 10 :
+      console.log(num, 'case 1');
+      break;
+    case num > 10 && num < 60 :
+      console.log(num, 'case 2');
+      break;
+    default:
+      console.log('num is not find')
+  }
+
+
+  // 合并
+
+  var num = 55;
+  switch(true) {
+    case num > 0 :
+      // 合并 dc
+      console.log(num, 'case 1');
+    case num > 10 && num < 60 :
+      console.log(num, 'case 2');
+      break;
+    default:
+      console.log('num is not find')
+  }
+
+  var product = {
+    name: 'clock'
+  };
+  function changeName(obj) {
+    obj.name = 'none'
+  }
+  changeName(product);
+  console.log(product)
+
+
+  function toString() {
+    console.log(this);
+  }
+
+
+  function Class() {
+
+  }
+
+
+
+  Class.prototype = {
+    toStr: toString,
+    nax: function() {
+
+    },
+    createApi: function() {
+
+    }
+  };
+
+  var cls = new Class();
+
+
+  cls.toStr()
+</script>
+</body>
+</html>

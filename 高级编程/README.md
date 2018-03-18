@@ -1,0 +1,8 @@
+
+弹出浏览器窗口
+移动/缩放/关闭浏览器窗口
+提供浏览器详细信息的navigator对象
+提供浏览器所加载页面详细信息的location对象
+提供用户显示器分辨率详细信息的screen对象
+对cookie的支持
+对XMLHttpRequest和IE的ActiveXObject这样的自定义对象。

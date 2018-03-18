@@ -1,7 +1,7 @@
 
 (function(exports) {
 
-  var Class = function(parent) {
+  exports.Class = function(parent) {
     var klass = function() {
       this.init.apply(this, arguments);
     };
@@ -47,6 +47,51 @@
       }
       if(included) included(klass)
 
+    };
+
+    // 给实例添加属性 也就是原型上的方法
+    klass.create = function(obj) {
+      var createApi = obj.createApi;
+
+      // 创建一个函数保存一下当前状态。
+      var create = function(key, i, func) {
+
+        if(typeof func === 'function') {
+
+          klass.fn[key][i] = function() {
+
+            return func.apply(klass.fn, arguments);
+          };
+        } else {
+
+          klass.fn[key][i] = func;
+        }
+      };
+
+      // 循环obj， 将所有的东西加载到原型上
+      for(var key in obj) {
+
+        klass.fn[key] = klass.fn[key] || {};
+
+        for(var i in obj[key]) {
+          create(key, i, obj[key][i])
+
+
+        }
+      }
+      if(createApi) createApi(klass)
+
+    };
+
+
+    klass.fn.setData = function(obj) {
+      klass.fn.data = klass.fn.data || {};
+
+      for(var key in obj) {
+
+        klass.fn.data[key] = obj[key];
+      }
+      console.log(klass.fn);
     };
 
     return klass;

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  for(var i = 0; i < 10; i++){
+    if(i === 4) {
+      break;
+    }
+    console.log(i + ' too')
+  }
+
+console.log('----------------------------------');
+  for(var i = 0; i < 10; i++){
+    if(i === 4) {
+      continue;
+    }
+    console.log(i + ' too')
+  }
+
+  console.log('----------------------------------');
+  /*for(var i = 0; i < 10; i++){   // return 报错
+    if(i === 4) {
+      return
+    }
+    console.log(i + ' too')
+  }*/
+  console.log('----------------------------------');
+
+// 当外部等于 3 时， 就把内部三后面的跳过了。
+var num = 0;
+for(var i=0; i<5;i++){
+  for(var j=0; j<5; j++){
+    if(i==3 && j==3){
+      break ;
+    }
+    console.log(i, j);
+    num++;
+  }
+}
+  console.log(num);
+  console.log('----------------------------------');
+
+  // 只把内外都是3的跳过了。
+var num = 0;
+for(var i=0; i<5;i++){
+  for(var j=0; j<5; j++){
+    if(i==3 && j==3){
+      continue ;
+    }
+    console.log(i, j);
+    num++;
+  }
+}
+  console.log(num);
+  console.log('----------------------------------');
+
+// 把内外都是3之后的全跳过了。
+var num = 0;
+outer:
+for(var i=0; i<5;i++){
+  for(var j=0; j<5; j++){
+    if(i==3 && j==3){
+      break outer;
+    }
+    console.log(i, j);
+    num++;
+  }
+}
+  console.log(num);
+  console.log('----------------------------------');
+
+  // 外部为 3， 内部 3 之后的跳过了。
+var num = 0;
+  outer:
+for(var i=0; i<5;i++){
+  for(var j=0; j<5; j++){
+    if(i==3 && j==3){
+      continue outer;
+    }
+    console.log(i, j);
+    num++;
+  }
+}
+  console.log(num);
+  console.log('----------------------------------');
+
+</script>
+</body>
+</html>
