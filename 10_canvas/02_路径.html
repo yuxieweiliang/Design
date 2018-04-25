@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>方形</title>
+</head>
+<body>
+<canvas width="200" height="200" id="canvas1"></canvas>
+<canvas width="200" height="200" id="canvas2"></canvas>
+</body>
+<script>
+  let canvas1 = document.getElementById('canvas1');
+  let canvas2 = document.getElementById('canvas2');
+  if (canvas1.getContext){
+    let ctx1 = canvas1.getContext('2d');
+    ctx1.beginPath();
+    ctx1.moveTo(75,50);
+    ctx1.lineTo(100,175);
+    ctx1.lineTo(100,25);
+    ctx1.fill();
+  }
+
+
+
+</script>
+</html>

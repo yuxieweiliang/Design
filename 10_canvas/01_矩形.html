@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>方形</title>
+</head>
+<body>
+<canvas width="200" height="200" id="canvas1"></canvas>
+<canvas width="200" height="200" id="canvas2"></canvas>
+<canvas width="200" height="200" id="canvas3"></canvas>
+</body>
+<script>
+  let canvas1 = document.getElementById('canvas1');
+  let canvas2 = document.getElementById('canvas2');
+  let canvas3 = document.getElementById('canvas3');
+  let ctx1 = null;
+  let ctx2 = null;
+  let ctx3 = null;
+  if(canvas1.getContext) {
+    ctx1 = canvas1.getContext('2d');
+    ctx1.fillRect(25, 25, 100, 100);
+  }
+
+  if(canvas2.getContext) {
+    ctx2 = canvas2.getContext('2d');
+    ctx2.fillRect(25, 25, 100, 100);
+    ctx2.clearRect(45,45,60,60);
+  }
+
+  if(canvas3.getContext) {
+    ctx3 = canvas3.getContext('2d');
+    ctx3.strokeRect(50,50,50,50);
+  }
+
+</script>
+</html>
