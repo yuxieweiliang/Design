@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lineJoin </title>
+</head>
+<body>
+<canvas id="canvas" width="200" height="200"></canvas>
+<script>
+  var ctx = document.getElementById('canvas').getContext('2d');
+
+  ///////////////////////////  lineJoin  线段连接处    //////////////////////////////////////
+  var lineJoin = ['round','bevel','miter'];
+  ctx.lineWidth = 10;
+
+  for (var i=0;i<lineJoin.length;i++){
+    ctx.lineJoin = lineJoin[i];
+    ctx.miterLimit = 2; // 只对 miter 起作用
+    ctx.beginPath();
+    ctx.moveTo(-5, 5+i*40);
+    ctx.lineTo(15, 45+i*40);
+    ctx.lineTo(25, 5+i*40);
+    ctx.lineTo(75, 45+i*40);
+    ctx.lineTo(105, 5+i*40);
+    ctx.stroke();
+  }
+</script>
+</body>
+</html>

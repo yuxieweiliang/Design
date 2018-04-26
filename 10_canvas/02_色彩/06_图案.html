@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>虚线setLineDash  </title>
+</head>
+<body>
+<canvas id="canvas" width="200" height="200"></canvas>
+<script>
+  var ctx = document.getElementById('canvas').getContext('2d');
+  // 创建新 image 对象，用作图案
+  var img = new Image();
+  img.src = 'aa.jpeg';
+  img.onload = function(){
+
+    // 创建图案
+    var ptrn = ctx.createPattern(img,'repeat');
+    ctx.fillStyle = ptrn;
+    ctx.fillRect(0,0,150,150);
+
+  }
+
+</script>
+</body>
+</html>

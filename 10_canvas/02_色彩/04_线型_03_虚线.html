@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>虚线setLineDash  </title>
+</head>
+<body>
+<canvas id="canvas" width="200" height="200"></canvas>
+<script>
+  var ctx = document.getElementById('canvas').getContext('2d');
+  var offset = 0;
+
+  function draw() {
+    ctx.clearRect(0,0, canvas.width, canvas.height);
+    ctx.setLineDash([24, 4]); // 设置选段长度与间距
+    ctx.lineDashOffset = -offset;
+    ctx.strokeRect(10,10, 100, 100);
+  }
+
+  function march() {
+    offset++;
+    if (offset > 24) {
+      offset = 0;
+    }
+    draw();
+    setTimeout(march, 20);
+  }
+
+  march();
+
+</script>
+</body>
+</html>

@@ -15,13 +15,13 @@
     let ctx1 = canvas1.getContext('2d');
 
     ctx1.beginPath();
-    ctx1.moveTo(75,25);
-    ctx1.quadraticCurveTo(0, 0, 0, 0);
-    /*ctx1.quadraticCurveTo(25,100,50,100);
+    ctx1.moveTo(75,25); // 起点坐标 x , y
+    ctx1.quadraticCurveTo(20, 25, 25, 65); // 起点控制器坐标 x , y  | 结束点坐标 x , y
+    ctx1.quadraticCurveTo(25,100,50,100);
     ctx1.quadraticCurveTo(50,120,30,125);
     ctx1.quadraticCurveTo(60,120,65,100);
     ctx1.quadraticCurveTo(125,100,125,62.5);
-    ctx1.quadraticCurveTo(125,25,75,25);*/
+    ctx1.quadraticCurveTo(125,25,75,25);
 
 
     ctx1.stroke();
@@ -30,14 +30,14 @@
     let ctx2 = canvas2.getContext('2d');
 
     ctx2.beginPath();
-    ctx2.moveTo(75,40);
-    ctx2.bezierCurveTo(75,37,70,25,50,25);
+    ctx2.moveTo(75,40); // 起点坐标 x , y
+    ctx2.bezierCurveTo(75, 37, 70, 25, 50, 25); // 起点控制器坐标 x , y  | 结束点控制器坐标 x , y | 结束点坐标 x , y
     ctx2.bezierCurveTo(20,25,20,62.5,20,62.5);
     ctx2.bezierCurveTo(20,80,40,102,75,120);
     ctx2.bezierCurveTo(110,102,130,80,130,62.5);
     ctx2.bezierCurveTo(130,62.5,130,25,100,25);
     ctx2.bezierCurveTo(85,25,75,37,75,40);
-    ctx2.fill();
+    ctx2.stroke();
   }
 
 

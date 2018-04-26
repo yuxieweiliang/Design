@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>填充颜色</title>
+</head>
+<body>
+<canvas id="canvas" width="500" height="800"></canvas>
+<script>
+  function draw() {
+    var ctx = document.getElementById('canvas').getContext('2d');
+    ctx.fillRect(0,0,300,300);
+    for (var i=0;i<3;i++) {
+      for (var j=0;j<3;j++) {
+        // 保存上一个
+        ctx.save();
+        // 重新设置样式
+        ctx.strokeStyle = "#9CFF00";
+        // 移动到当前原点
+        ctx.translate(50+j*100,50+i*100);
+        // 绘制图形
+        drawSpirograph(ctx, 20*(j+2)/(j+1), -8*(i+3)/(i+1), 10);
+        // 恢复上一个的样式
+        ctx.restore();
+      }
+    }
+  }
+  function drawSpirograph(ctx,R,r,O){
+    var x1 = R-O;
+    var y1 = 0;
+    var i  = 1;
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    do {
+      if (i>20000) break;
+      var x2 = (R+r)*Math.cos(i*Math.PI/72) - (r+O)*Math.cos(((R+r)/r)*(i*Math.PI/72))
+      var y2 = (R+r)*Math.sin(i*Math.PI/72) - (r+O)*Math.sin(((R+r)/r)*(i*Math.PI/72))
+      ctx.lineTo(x2,y2);
+      x1 = x2;
+      y1 = y2;
+      i++;
+    } while (x2 != R-O && y2 != 0 );
+    ctx.stroke();
+  }
+  draw()
+</script>
+</body>
+</html>

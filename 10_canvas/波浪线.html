@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>波浪线</title>
+</head>
+<body>
+<canvas id="canvas" width="800" height="800"></canvas>
+<script>
+  var start = -10;
+  var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+    function create(start, top, interval, radian, length) {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      // 二次贝塞尔曲线
+      ctx.beginPath();
+      ctx.save();
+      ctx.moveTo(start, top);
+
+      function createCurve(top, interval, radian, length) {
+        for(var i = 1; i < length; i++) {
+          var x = interval*i - interval/2 + start;
+          var y =  i%2 ? top + radian : top - radian;
+
+          // console.log(x, y, x, y, i*interval, top)
+          ctx.bezierCurveTo(x, y, x, y, i*interval + start, top);
+        }
+      }
+
+      createCurve(top, interval, radian, length)
+      ctx.stroke();
+    }
+
+    function step(timestamp) {
+      start += 5 ;
+      if(start < 10) {
+        create(start, 150, 100, 20, 35)
+        window.requestAnimationFrame(step);
+      }
+    }
+    window.requestAnimationFrame(step);
+  }
+
+</script>
+</body>
+</html>
