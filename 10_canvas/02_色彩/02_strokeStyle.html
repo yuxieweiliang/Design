@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>轮廓颜色</title>
+</head>
+<body>
+<canvas id="canvas1" width="200" height="200"></canvas>
+<canvas id="canvas2" width="200" height="200"></canvas>
+<script>
+  var ctx1 = document.getElementById('canvas1').getContext('2d');
+  var ctx2 = document.getElementById('canvas2').getContext('2d');
+  // 轮廓颜色 -> 因为矩形没有轮廓，所以默认黑色
+  for (var i=0;i<6;i++){
+    for (var j=0;j<6;j++){
+      ctx1.strokeStyle = 'rgb(0,' + Math.floor(255-42.5*i) + ',' + Math.floor(255-42.5*j) + ')';
+      ctx1.fillRect(j*25, i*25, 25, 25);
+    }
+  }
+  // 轮廓颜色
+  for (var i=0;i<6;i++){
+    for (var j=0;j<6;j++){
+      ctx2.strokeStyle = 'rgb(0,' + Math.floor(255-42.5*i) + ',' + Math.floor(255-42.5*j) + ')';
+      ctx2.beginPath();
+      ctx2.arc(12.5+j*25,12.5+i*25,10,0,Math.PI*2,true);
+      ctx2.stroke();
+    }
+  }
+</script>
+</body>
+</html>

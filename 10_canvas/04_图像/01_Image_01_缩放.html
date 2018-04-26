@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>缩放</title>
+</head>
+<body>
+<canvas id="canvas1" width="500" height="800"></canvas>
+<script>
+  var ctx = document.getElementById('canvas1').getContext('2d');
+  var img = new Image();   // 创建一个<img>元素
+  img.src = 'aa.jpeg'; // 设置图片源地址
+  img.onload = function(){
+    for (var i = 0; i < 4; i++){
+      for (var j = 0; j < 3; j++){
+        // drawImage(image, x, y, width, height)
+        ctx.drawImage(img, j * 50, i * 80, 50, 80);
+      }
+    }
+  }
+</script>
+</body>
+</html>

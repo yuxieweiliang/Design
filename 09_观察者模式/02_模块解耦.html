@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="msg"></div>
+<textarea name="" id="user_input" cols="30" rows="10"></textarea>
+<div id="msg_num"></div>
+<button id="user_submit">提交</button>
+<script>
+  // 将观察者放在闭包中，当页面加载就立即执行
+  var Observer = (function() {
+    var _messages = { };
+    return {
+      // 注册信息接口
+      register: function(type, fn) {
+        if(typeof _messages[type] === 'undefined') {
+          _messages[type] = [fn];
+        } else {
+          _messages[type].push(fn);
+        }
+      },
+      // 发布信息接口
+      fire: function(type, args) {
+        if(!_messages[type]) return;
+        var events = {
+          type: type,
+          args: args || {}
+        },
+          i = 0,
+          len = _messages[type].length;
+        for(; i < len; i++) {
+          _messages[type][i].call(this, events);
+        }
+      },
+      // 移除信息接口
+      remove: function(type) {
+        if(_messages[type] instanceof Array) {
+          var i = _messages[type].length -1;
+          for(; i <= 0; i--) {
+            _messages[type][i] === fn && _messages[type].splice(i, 1)
+          }
+        }
+      }
+    }
+  })();
+/*  Observer.register('test', function(e) {
+    console.log(e.args.msg)
+  });*/
+
+ /* Observer.fire('test', {msg: '不知道说啥1！'})
+  Observer.fire('test', {msg: '不知道说啥2！'})
+  Observer.fire('test', {msg: '不知道说啥3！'})*/
+
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  // 工程师A
+  (function() {
+    function addMsgItem(e) {
+      var text = e.args.text,
+        ul = $('msg'),
+        li = document.createElement('li'),
+        span = document.createElement('span');
+      li.innerHTML = text;
+      span.onclick = function() {
+        ul.removeChild(li);
+        Observer.fire('removeCommentMessage', {
+          num: -1
+        });
+      }
+
+      li.appendChild(span);
+
+      ul.appendChild(li);
+    }
+    Observer.register('addCommentMessage', addMsgItem)
+  })();
+
+  // 工程师B
+  (function() {
+    function changeMsgNum(e) {
+      var num = e.args.num;
+      var text = $('msg_num').innerHTML || 0;
+
+      console.log(num)
+      $('msg_num').innerHTML = parseInt(text) + num;
+    }
+    Observer.register('addCommentMessage', changeMsgNum);
+    Observer.register('removeCommentMessage', changeMsgNum);
+
+  })();
+
+  // 工程师B
+  (function() {
+    $('user_submit').onclick = function() {
+      var text = $('user_input');
+      if(text.value === '') return;
+
+      Observer.fire('addCommentMessage', {
+        text: text.value,
+        num: 1
+      });
+
+      text.value = '';
+    }
+  })();
+</script>
+</body>
+</html>

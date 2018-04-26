@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组合</title>
+</head>
+<body>
+<img class="grayscale" src="aa.jpeg" alt="Description of my picture" />
+<canvas id="canvas" width="400" height="400"></canvas>
+<canvas id="zoom" width="400" height="400"></canvas>
+<div id="color" style="width: 10px; height: 10px;"></div>
+<script>
+
+  window.addEventListener("load", removeColors);
+
+  function showColorImg() {
+    this.style.display = "none";
+    this.nextSibling.style.display = "inline";
+  }
+
+  function showGrayImg() {
+    this.previousSibling.style.display = "inline";
+    this.style.display = "none";
+  }
+
+  function removeColors() {
+    var aImages = document.getElementsByClassName("grayscale"),
+      nImgsLen = aImages.length,
+      oCanvas = document.createElement("canvas"),
+      oCtx = oCanvas.getContext("2d");
+
+
+    for (var nWidth, nHeight, oImgData, oGrayImg, nPixel, aPix, nPixLen, nImgId = 0; nImgId < nImgsLen; nImgId++) {
+      oColorImg = aImages[nImgId];
+      nWidth = oColorImg.offsetWidth;
+      nHeight = oColorImg.offsetHeight;
+      oCanvas.width = nWidth;
+      oCanvas.height = nHeight;
+      oCtx.drawImage(oColorImg, 0, 0);
+      oImgData = oCtx.getImageData(0, 0, nWidth, nHeight);
+      aPix = oImgData.data;
+      nPixLen = aPix.length;
+      for (nPixel = 0; nPixel < nPixLen; nPixel += 4) {
+        aPix[nPixel + 2] = aPix[nPixel + 1] = aPix[nPixel] = (aPix[nPixel] + aPix[nPixel + 1] + aPix[nPixel + 2]) / 3;
+      }
+      oCtx.putImageData(oImgData, 0, 0);
+      oGrayImg = new Image();
+      // 设置图片格式以及质量
+      oGrayImg.src = oCanvas.toDataURL("image/jpeg", 0.1);
+
+      // console.log(oGrayImg.src);
+      oGrayImg.onmouseover = showColorImg;
+      oColorImg.onmouseout = showGrayImg;
+      oCtx.clearRect(0, 0, nWidth, nHeight);
+      oColorImg.style.display = "none";
+      oColorImg.parentNode.insertBefore(oGrayImg, oColorImg);
+    }
+  }
+</script>
+</body>
+</html>

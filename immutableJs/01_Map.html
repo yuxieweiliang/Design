@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="./immutable.js"></script>
+<script>
+  const { Map, List } = Immutable
+  const log = function() {console.log.apply(null, arguments)}
+  // Map 类型
+  let data = Map({
+    first: 1,
+    last: 2
+  })
+
+  // 读取
+  log('data: first', data.get('first')) // -> 1
+
+  // 设置 set()
+  data.set('middle', 3)
+
+  // size
+  log('data: size ->', data.size) // true
+
+  // 读取
+  log('data: middle', data.get('middle')) // -> undefined
+
+  let data_1 = data.set('middle', 3)
+
+  // 读取
+  log('data: middle', data.get('middle')) // -> undefined
+  log('data_1: middle', data_1.get('middle')) // -> 3
+
+  // 转 js 对象
+  log('data: toJs', data.toJS()) // -> {first: 1, last: 2}
+  log('data_1: toJs', data_1.toJS()) // -> {first: 1, last: 2, middle: 3}
+
+  // 会将两位数组转换成 map 格式
+  let data_2 = Map({ key2: "value2" })
+  let data_3 = Map([ [ "key3", "value3" ], [ "key3_1", "value3_1" ] ])
+
+  log(data_2.toJSON()) // -> {key2: "value2"}
+  log(data_3.toJSON()) // -> {key3: "value3", key3_1: "value3_1"}
+
+  // 只能用字符串 "1" 取值
+  let map = Map({ 1: "one" })
+  log(map.get(1), map.get('1')) // -> undefined "one"
+
+  log(map.toJS())
+
+  // 检查是否是 Map 格式
+  log('isMap: {} ->', Map.isMap({})) // false
+  log('isMap: Map() ->',Map.isMap(Map())) // true
+
+  // 删除
+  let data_4 = data.set('delete', 0)
+  log(data_4.toJS()) // {first: 1, last: 2, delete: 0}
+
+  let data_5 = data_4.delete('delete')
+  log(data_5.toJS()) // {first: 1, last: 2}
+
+  // 删除 多个
+  let data_6 = data_4.set('delete_1', 'delete_1')
+  log(data_6.toJS()) // {first: 1, last: 2, delete: 0, delete_1: "delete_1"}
+  let data_7 = data_4.deleteAll(['delete', 'delete_1'])
+  log(data_7.toJS()) // {first: 1, last: 2}
+
+  // 全部清除 clear()
+  let data_8 = data_6.clear()
+  log(data_8.toJS()) // {}
+
+  let aMap = Map({ key: 'value' })
+  let newMap = aMap.update('key', value => value + value)
+  log(newMap.toJS()) // {key: "valuevalue"}
+  aMap.map((item, key) => log(item, key))
+
+</script>
+</html>

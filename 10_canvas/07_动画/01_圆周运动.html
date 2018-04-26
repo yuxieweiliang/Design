@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>直线运动</title>
+</head>
+<body>
+<canvas id="canvas">你的浏览器不支持canvas，请跟换其他浏览器试一试</canvas>
+<script>
+
+  var canvas=document.getElementById('canvas');
+  canvas.height=728;
+  canvas.width=1024;
+  var cxt=canvas.getContext('2d');
+  var time=0;//定义运动的执行次数
+  function run(){
+
+    cxt.clearRect(0,0,1024,728);
+    drawNotChange(cxt);
+    cxt.save();//将当前以左上角坐标为(0,0)的上下文环境进行保存，这样是为了在接下来中要进行画布偏移后，可以进行还原当前的环境
+    cxt.translate(500,400); // 设定原点
+    cxt.rotate(time*1.2*Math.PI/180);//设定每次旋转的度数
+    cxt.fillStyle='blue';
+    cxt.beginPath();
+    cxt.arc(0,150, 30, 0, 2*Math.PI, false);
+    cxt.fill();
+    cxt.restore();//将当前为(500,400)的点还原为（0,0）,其实在save中就是将上下文环境保存到栈中，在restore下面对其进行还原
+    time+=1;
+
+    // 如果X轴大于0 则继续执行
+    window.webkitRequestAnimationFrame(run)
+  }
+
+  // 绘制不变因素
+  function drawNotChange(context){
+    context.fillStyle='#aaa';
+    context.beginPath();
+    context.arc(500,400,10,0,2*Math.PI,true);
+    context.closePath();
+    context.fill();
+    context.beginPath();
+    context.arc(500,400,150,0,2*Math.PI,true);
+    context.closePath();
+    context.stroke();
+  }
+
+
+
+
+  window.webkitRequestAnimationFrame(run)
+</script>
+</body>
+</html>

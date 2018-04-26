@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>波浪线</title>
+</head>
+<body>
+//demo.html
+<canvas id='canvas' width='500' height='500'></canvas>
+[注]
+设置canvas的宽高要在元素或在其API，canvas.width || canvas.height，在CSS上设置为得到意想不到的结果，不信试试看哈···
+<script>
+
+  //demo.js
+  var canvas = document.getElementById('canvas');
+  var context = canvas.getContext('2d');
+
+  //路径或图形
+  context.fillRect();//填充矩形
+  context.strokeRect();//勾勒矩形轮廓
+  context.arc(x,y,r,anglestart,angleend,clockwise);//画弧形
+
+  context.beginPath();//开始路径
+  context.moveTo();//定义路径起始点
+  context.lineTo();//路径的去向
+  context.closePath();//画完后，关闭路径
+  context.fill() || context.stroke();//最后画出由路径构成的图形
+
+  context.save();//保存save以上context对象设置的属性值
+  context.restore();//恢复到先前保存在context对象上的所有属性值
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>填充颜色</title>
+</head>
+<body>
+<canvas id="canvas1" width="200" height="200"></canvas>
+<canvas id="canvas2" width="200" height="200"></canvas>
+<script>
+  var ctx1 = document.getElementById('canvas1').getContext('2d');
+  var ctx2 = document.getElementById('canvas2').getContext('2d');
+
+  // 填充颜色
+  for (var i=0;i<6;i++){
+    for (var j=0;j<6;j++){
+      ctx1.fillStyle = 'rgb(' + Math.floor(255-42.5*i) + ',' + Math.floor(255-42.5*j) + ', 0)';
+      ctx1.fillRect(j*25, i*25, 25, 25);
+    }
+  }
+  // 填充颜色 -> 因为arc方法画的是边框，所以没有颜色
+  for (var i=0;i<6;i++){
+    for (var j=0;j<6;j++){
+      ctx2.fillStyle = 'rgb(' + Math.floor(255-42.5*i) + ',' + Math.floor(255-42.5*j) + ', 0)';
+      ctx2.beginPath();
+      ctx2.arc(12.5+j*25, 12.5+i*25, 10, 0, Math.PI*2, true);
+      ctx2.stroke();
+    }
+  }
+</script>
+</body>
+</html>

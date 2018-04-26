@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组合</title>
+</head>
+<body>
+<input type="checkbox" id="smoothbtn"/>
+<button id="grayscalebtn">grayscalebtn</button>
+<canvas id="canvas" width="400" height="400"></canvas>
+<canvas id="zoom" width="400" height="400"></canvas>
+<div id="color" style="width: 10px; height: 10px;"></div>
+<script>
+  var img = new Image();
+  img.src = 'https://mdn.mozillademos.org/files/5397/rhino.jpg';
+  img.onload = function() {
+    draw(this);
+  };
+
+  function draw(img) {
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    img.style.display = 'none';
+    var zoomctx = document.getElementById('zoom').getContext('2d');
+
+    var smoothbtn = document.getElementById('smoothbtn');
+    var toggleSmoothing = function(event) {
+      zoomctx.imageSmoothingEnabled = this.checked;
+      zoomctx.mozImageSmoothingEnabled = this.checked;
+      zoomctx.webkitImageSmoothingEnabled = this.checked;
+      zoomctx.msImageSmoothingEnabled = this.checked;
+    };
+    smoothbtn.addEventListener('change', toggleSmoothing);
+
+    var zoom = function(event) {
+      var x = event.layerX;
+      var y = event.layerY;
+      //
+      zoomctx.drawImage(canvas, Math.abs(x - 5), Math.abs(y - 5), 40, 40, 0, 0, 400, 400);
+    };
+
+    canvas.addEventListener('mousemove', zoom);
+  }
+</script>
+</body>
+</html>

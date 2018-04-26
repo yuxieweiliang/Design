@@ -36,6 +36,31 @@
     // interface.ensureImplements
 
 
+    function Ninja() {
+
+    }
+
+
+    Ninja.prototype.string = function(){console.log('------------')};
+
+    var Persoon = function(){};
+
+    Persoon.prototype = new Ninja();
+    Persoon.prototype.indexOfPerson = function() {};
+
+    var Child = function() {};
+
+    Child.prototype =  new Persoon();
+    Child.prototype.childLength = function() {};
+
+
+    var child = new Child();
+
+    console.log(child);
+
+
+
+
     function assert(condition, message) {
       if(!condition) console.error(message)
     }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>方形</title>
+</head>
+<body>
+<canvas width="300" height="300" id="canvas1"></canvas>
+<canvas width="300" height="300" id="canvas2"></canvas>
+</body>
+<script>
+  let canvas1 = document.getElementById('canvas1');
+  let canvas2 = document.getElementById('canvas2');
+  let ctx1 = null;
+  let ctx2 = null;
+  if(canvas1.getContext) {
+    ctx1 = canvas1.getContext('2d');
+
+    ctx1.fillStyle = "rgb(200,0,0)";
+    ctx1.fillRect (10, 10, 55, 50);
+
+    ctx1.fillStyle = "rgba(0, 0, 200, 0.5)";
+    ctx1.fillRect (30, 30, 55, 50);
+  }
+
+
+  if(canvas2.getContext) {
+    ctx2 = canvas2.getContext('2d');
+    //创建放射状/圆形渐变对象。 -> 开始x | 开始y | 开始r | 结束x | 结束y | 结束r
+    let grd1=ctx2.createRadialGradient(100, 100, 0, 100, 100, 100);
+    let grd2=ctx2.createRadialGradient(140, 140, 0, 150, 150, 100);
+    grd1.addColorStop(0,"red");
+    grd1.addColorStop(1,"rgba(255, 255, 255, 0)");
+    ctx2.fillStyle= grd1;
+    ctx2.fillRect(10, 10, 240, 240);
+
+    grd2.addColorStop(0,"blue");
+    grd2.addColorStop(1,"rgba(255, 255, 255, 0)");
+    ctx2.fillStyle= grd2;
+    ctx2.fillRect(0, 0, 240, 240);
+  }
+
+</script>
+</html>

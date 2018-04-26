@@ -6,7 +6,11 @@
 </head>
 <body>
 <button id="btn">btn</button>
+<<<<<<< HEAD
 <!--<script src="../../jquery.min.js"></script>-->
+=======
+<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+>>>>>>> 0d641df622e8c04a9eb51656083ac9b417f48166
 <script src="./04_添加私有函数.js"></script>
 <script>
 
@@ -26,13 +30,16 @@
   });
 
   Person.include({
+    init() {
+      this.abc = 'abc'
+    },
     save: function(){},
     destroy: function(){},
     click: function() {
-      console.log(this);
       // this.elem.click(this.proxy(this.click));
     }
   });
+<<<<<<< HEAD
   Person.create({
     api: {
       getUser: getUser
@@ -66,7 +73,20 @@
   });
 
 
+=======
+
+  var abc = new Person()
+  console.log(abc)
+
+  let Child = new Class(Person);
+  Child.include({
+    init() {
+      this.obj = 'obj'
+    }
+  })
+>>>>>>> 0d641df622e8c04a9eb51656083ac9b417f48166
   child = new Child();
+  console.log(child)
 
   //  $('#btn').click(child.proxy(child.click));
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>透明度 </title>
+</head>
+<body>
+<canvas id="canvas1" width="200" height="200"></canvas>
+<canvas id="canvas2" width="200" height="200"></canvas>
+<canvas id="canvas3" width="200" height="200"></canvas>
+<script>
+  var ctx1 = document.getElementById('canvas1').getContext('2d');
+  var ctx2 = document.getElementById('canvas2').getContext('2d');
+  var ctx3 = document.getElementById('canvas3').getContext('2d');
+  ctx1.fillStyle  = "rgba(255,0,0,0.2)";
+  ctx1.fillRect(25, 25, 125, 125);
+  ctx1.fillRect(125, 125, 225, 225);
+
+  ////////////////////////////////////////////////////////////////////
+  // 画背景
+  ctx2.fillStyle = '#FD0';
+  ctx2.fillRect(0,0,75,75);
+  ctx2.fillStyle = '#6C0';
+  ctx2.fillRect(75,0,75,75);
+  ctx2.fillStyle = '#09F';
+  ctx2.fillRect(0,75,75,75);
+  ctx2.fillStyle = '#F30';
+  ctx2.fillRect(75,75,75,75);
+  ctx2.fillStyle = '#FFF';
+
+  // 设置透明度值
+  ctx2.globalAlpha = 0.2;
+
+  // 画半透明圆
+  for (var i=0;i<7;i++){
+    ctx2.beginPath();
+    ctx2.arc(75, 75, 10+10*i, 0, Math.PI*2, true);
+    ctx2.fill();
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // 画背景
+  ctx3.fillStyle = 'rgb(255,221,0)';
+  ctx3.fillRect(0,0,150,37.5);
+  ctx3.fillStyle = 'rgb(102,204,0)';
+  ctx3.fillRect(0,37.5,150,37.5);
+  ctx3.fillStyle = 'rgb(0,153,255)';
+  ctx3.fillRect(0,75,150,37.5);
+  ctx3.fillStyle = 'rgb(255,51,0)';
+  ctx3.fillRect(0,112.5,150,37.5);
+
+  // 画半透明矩形
+  for (var i=0;i<10;i++){
+    ctx3.fillStyle = 'rgba(255,255,255,'+(i+1)/10+')';
+    for (var j=0;j<4;j++){
+      ctx3.fillRect(5+i*14,5+j*37.5,14,27.5)
+    }
+  }
+
+</script>
+</body>
+</html>

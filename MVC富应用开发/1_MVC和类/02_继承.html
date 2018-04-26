@@ -14,21 +14,42 @@
     find: function() {
       return '1'
     },
-    exists: function() {}
+    exists: function() {
+      return '1'
+    }
   });
 
   Person.include({
-    save: function(){},
-    destroy: function(){}
+    save: function(){
+      return '1'
+
+    },
+    destroy: function(){
+      return '1'
+
+    }
   });
 
-
   var Child = new Class(Person);
+  Child.extend({
+    find: function() {
+      return '2'
+    },
+    exists: function() {
+      return '2'
+    }
+  });
 
+  Child.include({
+    save: function(){
+      return '2'
+    },
+    destroy: function(){
+      return '2'
+    }
+  });
   child = new Child();
-
-
-  console.log(child);
+  console.log(Child.find());
 
 </script>
 </body>

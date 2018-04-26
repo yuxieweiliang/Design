@@ -28,8 +28,9 @@
     var NumNav = function (data) {
         var tpl = '<b>{#num#}</b>';
         for(var i= data.length - 1; i>=0; i--){
-            data[i].name += data[i].name + formateStromg(tpl, data[i]);
+            data[i].name += formateStromg(tpl, data[i]);
         }
+      console.log(data)
         //继承基础导航类，并返回字符串
         return Nav.call(this, data);
     };
@@ -39,23 +40,25 @@
         var tpl = '<span>{#link#}</span>';
         //装饰数据
         for(var i = data.length - 1; i >= 0; i--){
-            data[i].name += data[i].name + formateStromg(tpl, data[i]);
+            data[i].name += formateStromg(tpl, data[i]);
         }
         return Nav.call(this, data);
     };
 
     //创建
     var nav = document.getElementsByTagName('body')[0];
-    nav.innerHTML = NumNav([
+    nav.innerHTML = LinkNav([
         {
             href : 'www.baidu.com',
+          link : 'www.baidu.com',
             title : '百度一下，你就知道',
-            name: '百度',
+            name: '百度1',
             num : '10'
         },{
             href : 'www.baidu.com',
+        link : 'www.baidu.com',
             title : '百度一下，你就知道',
-            name: '百度',
+            name: '百度2',
             num : '10'
         }
     ])

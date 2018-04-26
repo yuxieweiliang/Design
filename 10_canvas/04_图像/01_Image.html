@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>填充颜色</title>
+</head>
+<body>
+<canvas id="canvas1" width="500" height="800"></canvas>
+<script>
+  var ctx = document.getElementById('canvas1').getContext('2d');
+  var img = new Image();   // 创建一个<img>元素
+  img.src = 'aa.jpeg'; // 设置图片源地址
+  img.onload = function(){
+    ctx.drawImage(img, 0, 0);
+    ctx.beginPath();
+    ctx.moveTo(30, 96);
+    ctx.lineTo(70, 66);
+    ctx.lineTo(103, 76);
+    ctx.lineTo(170, 15);
+    ctx.stroke();
+  }
+</script>
+</body>
+</html>

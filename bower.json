@@ -1,0 +1,21 @@
+{
+  "name": "Design",
+  "homepage": "https://github.com/yuxieweiliang/Design",
+  "authors": [
+    "风吹雪 <yunruofengsheng@126.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jQuery": "^3.3.1",
+    "jquery-ui": "^1.12.1"
+  }
+}
