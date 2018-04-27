@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>匀速运动</title>
+</head>
+<body>
+<canvas id="canvas" width="1200" height="600"></canvas>
+<script>
+  window.onload = function () {
+    var oCanvas = document.querySelector("#canvas"),
+      oGc = oCanvas.getContext('2d'),
+      width = oCanvas.width, height = oCanvas.height,
+      x = 0;
+
+    function drawBall(x, y, cxt) {
+      cxt.fillStyle = '#09f';
+      cxt.beginPath();
+      cxt.arc(x, y, 20, 0, 2 * Math.PI);
+      cxt.closePath();
+      cxt.fill();
+    }
+
+    (function linear() {
+      oGc.clearRect(0, 0, width, height);
+      drawBall(x, height / 2, oGc);
+      x += 2;
+      console.log(x);
+      requestAnimationFrame(linear);
+    })();
+  }</script>
+</body>
+</html>

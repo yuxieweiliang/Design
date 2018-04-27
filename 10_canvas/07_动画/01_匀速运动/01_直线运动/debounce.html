@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script src="./util.js"></script>
+<script>
+
+  function init(e) {
+    console.log(e)
+  }
+
+  document.addEventListener('mousemove', throttle(init, 500, true))
+</script>
+</body>
+</html>

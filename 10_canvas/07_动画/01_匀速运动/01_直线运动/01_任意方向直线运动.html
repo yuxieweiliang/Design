@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01_任意方向直线运动</title>
+</head>
+<body>
+<canvas id="canvas" height="800" width="800">你的浏览器不支持canvas，请跟换其他浏览器试一试</canvas>
+<script src="./ball.js"></script>
+<script src="./util.js"></script>
+<script src="./polyfill.js"></script>
+<script>
+  window.onload = function () {
+    var oCanvas = document.querySelector("#canvas"),
+        oGc = oCanvas.getContext('2d'),
+        width = oCanvas.width, height = oCanvas.height,
+        ball = new Ball( 0, 0 ),
+        speed = 15,
+        vx = speed * Math.cos( 32 * Math.PI / 180 ), // 余弦值 * 速度 = X 轴的运动
+        vy = speed * Math.sin( 32 * Math.PI / 180 ); // 正弦值 * 速度 = Y 轴的运动
+
+    ;(function() {
+      if(!window.animation) {
+        var callback = null;
+        var interval = null;
+        var index = 0
+        function animation(cb, time) {
+          var move = false;
+          if(!interval) interval = time
+          if(typeof cb === 'function') {
+            callback = cb;
+            cb(0)
+          } else {
+            index ++
+            if(typeof interval === 'object') {
+              for(var i = 0; i < interval.length; i++) {
+                move = (index % interval[i])
+              }
+            } else if(!(index % interval)) {
+              move = false
+            } else {
+              move = true
+            }
+
+            if(move) {
+              callback(index)
+            }
+          }
+
+          requestAnimationFrame(animation)
+        }
+        window.animation = animation
+      }
+    })();
+
+
+    function linear(time) {
+      if(ball.x > height && ball.y > width) {
+        return
+      }
+
+      oGc.clearRect(0, 0, width, height);
+      ball.fill( oGc );
+
+      console.log(time)
+        ball.x += vx;
+        ball.y += vy;
+
+    }
+    animation(linear, 12);
+
+
+
+
+  }
+
+</script>
+</body>
+</html>

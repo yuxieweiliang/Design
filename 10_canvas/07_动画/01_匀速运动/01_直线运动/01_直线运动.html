@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>直线运动</title>
+</head>
+<body>
+<canvas id="canvas">你的浏览器不支持canvas，请跟换其他浏览器试一试</canvas>
+<script>
+
+  var canvas=document.getElementById('canvas');
+  canvas.height=1024;
+  canvas.width=1024;
+  var cxt=canvas.getContext('2d');
+  cxt.fillStyle='red';
+
+  var speed=0;
+  var startPointX=800;
+  var startPointY=0;
+
+  function run(){
+    speed = -( startPointX / 10);
+
+    // 首先清楚画布
+    cxt.clearRect(0, 0, canvas.height, canvas.width);
+
+    // 获取当前坐标
+    startPointY += -speed;
+    startPointX += speed;
+
+    // 准备开始
+    cxt.beginPath();
+
+    // 画一个圆形
+    cxt.arc(startPointX, startPointY, 30, 0, 2 * Math.PI, true);
+
+    // 关闭路径
+    cxt.closePath();
+
+    // 画图
+    cxt.fill();
+
+    // 如果X轴大于0 则继续执行
+    if(startPointX > 0) {
+      window.webkitRequestAnimationFrame(run)
+    }
+  }
+
+  window.webkitRequestAnimationFrame(run)
+</script>
+</body>
+</html>
