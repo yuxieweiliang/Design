@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>加速</title>
+</head>
+<body>
+<canvas id="canvas" width="1200" height="600"></canvas>
+<br>
+弹跳：<br>
+每次碰撞，将方向取反，并根据需要将速度取反减小
+<script src="./ball.js"></script>
+<script>
+  window.onload = function () {
+    var oCanvas = document.querySelector("#canvas"),
+      oGc = oCanvas.getContext('2d'),
+      width = oCanvas.width, height = oCanvas.height,
+      ball = new Ball( width / 2, 20 ),
+      vy = 0,
+      gravity = 0.2,
+      bounce = -0.6;
+    (function linear() {
+      oGc.clearRect(0, 0, width, height);
+      ball.fill( oGc );
+      ball.y += vy;
+
+      // 如果 y 大于画布的边界，也就是碰撞的时候，将原本的力量取反减小
+      if ( ball.y > canvas.height - ball.radius ) {
+        // 将物体置于边界
+        ball.y = canvas.height - ball.radius;
+        // 给予一个相反并且不断减小的力
+        vy *= bounce;
+        bounce -= 0.1
+      }
+      vy += gravity;
+
+      requestAnimationFrame(linear);
+    })();
+  }
+</script>
+</body>
+</html>

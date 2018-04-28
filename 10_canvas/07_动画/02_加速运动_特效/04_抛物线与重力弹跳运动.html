@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>加速</title>
+</head>
+<body>
+<canvas id="canvas" width="1200" height="600"></canvas>
+<br>
+抛物线与重力弹跳<br>
+<script src="./ball.js"></script>
+<script>
+  window.onload = function () {
+    var oCanvas = document.querySelector("#canvas"),
+      oGc = oCanvas.getContext('2d'),
+      width = oCanvas.width, height = oCanvas.height,
+      ball = new Ball( 0, height ),
+      vy = -10,
+      vx = 5,
+      gravity = 0.2,
+      bounce = -0.8;
+
+    (function linear() {
+      oGc.clearRect(0, 0, width, height);
+      ball.fill( oGc );
+      ball.y += vy;
+      ball.x += vx;
+      // 弹跳，给予一个碰撞的力
+      if ( ball.y > canvas.height - ball.radius ) {
+        ball.y = canvas.height - ball.radius;
+        vy *= bounce;
+      }
+
+      // 抛物线、 给于一个重力
+      vy += gravity;
+      requestAnimationFrame(linear);
+    })();
+  }
+</script>
+</body>
+</html>

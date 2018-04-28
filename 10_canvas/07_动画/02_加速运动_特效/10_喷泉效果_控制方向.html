@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>加速</title>
+</head>
+<body>
+<canvas id="canvas" width="600" height="600"></canvas>
+<script src="./ball.js"></script>
+<script>
+  window.onload = function () {
+    var oCanvas = document.querySelector("#canvas"),
+      oGc = oCanvas.getContext('2d'),
+      width = oCanvas.width, height = oCanvas.height,
+      balls = [], n = 50;
+    function getRandColor() {
+      // callee 函数自身的引用 ||||  caller 调用当前函数的函数的引用，如果没有，则返回null
+      return '#' + ( function factorial ( color ) {
+          return ( color += '0123456789abcdef' [Math.floor( Math.random() * 16 )] ) && ( color.length == 6 ) ? color : factorial( color );
+        } )( '' );
+    }
+    for( var i = 0; i < n; i++ ) {
+      var ball = new Ball( width / 2, height / 2, 20, getRandColor() );
+      // X 轴 取 绝对值 ， 指向右方发射
+      ball.vx = Math.abs( ( Math.random() * 2 - 1 ) * 5 );
+      ball.vy = ( Math.random() * 2 - 1 ) * 5;
+      balls.push( ball );
+    }
+    (function move(){
+      oGc.clearRect( 0, 0, width, height );
+      balls.forEach( function( ball ){
+        if ( ball.x < -ball.radius
+          || ball.x > width + ball.radius
+          || ball.y < -ball.radius
+          || ball.y > height + ball.radius ) {
+          ball.x = width / 2;
+          ball.y = height / 2;
+          ball.vx = Math.abs( ( Math.random() * 2 - 1 ) * 5 );
+          ball.vy = ( Math.random() * 2 - 1 ) * 5;
+        }
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+        ball.fill( oGc );
+      } );
+      requestAnimationFrame( move );
+    })();
+  }
+</script>
+</body>
+</html>

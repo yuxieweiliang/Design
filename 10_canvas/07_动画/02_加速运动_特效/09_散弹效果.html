@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>加速</title>
+</head>
+<body>
+<canvas id="canvas" width="600" height="600"></canvas>
+<script src="./ball.js"></script>
+<script>
+  window.onload = function () {
+    var oCanvas = document.querySelector("#canvas"),
+      oGc = oCanvas.getContext('2d'),
+      width = oCanvas.width, height = oCanvas.height,
+      balls = [], n = 50;
+    function getRandColor() {
+      return '#' + ( function( color ){
+          return ( color += '0123456789abcdef' [Math.floor( Math.random() * 16 )] ) && ( color.length == 6 ) ? color : arguments.callee( color );
+        } )( '' );
+    }
+    for( var i = 0; i < n; i++ ) {
+      var ball = new Ball( width / 2, height / 2, 20, getRandColor() );
+      // 随机 X Y 轴
+      ball.vx = ( Math.random() * 2 - 1 ) * 5;
+      ball.vy = ( Math.random() * 2 - 1 ) * 5;
+      balls.push( ball );
+    }
+
+    (function move(){
+      oGc.clearRect( 0, 0, width, height );
+      balls.forEach( function( ball ){
+
+        // 如果超出边界
+        if ( ball.x < -ball.radius
+          || ball.x > width + ball.radius
+          || ball.y < -ball.radius
+          || ball.y > height + ball.radius ) {
+          // 将其重新放回原点
+          ball.x = width / 2;
+          ball.y = height / 2;
+          // 重新分配速度
+          ball.vx = ( Math.random() * 2 - 1 ) * 5;
+          ball.vy = ( Math.random() * 2 - 1 ) * 5;
+        }
+
+        // 匀速运动
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+
+        // 更新
+        ball.fill( oGc );
+      } );
+      requestAnimationFrame( move );
+    })();
+  }
+</script>
+</body>
+</html>

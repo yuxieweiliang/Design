@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>加速</title>
+</head>
+<body>
+<canvas id="canvas" width="1200" height="600"></canvas>
+<script src="./ball.js"></script>
+<script>
+  window.onload = function () {
+    var oCanvas = document.querySelector("#canvas"),
+      oGc = oCanvas.getContext('2d'),
+      width = oCanvas.width, height = oCanvas.height,
+      ball = new Ball( 0, height - 20 ),
+      vx = 20,
+      friction = 0.98; // 摩擦力
+
+    (function linear() {
+      oGc.clearRect(0, 0, width, height);
+      ball.fill( oGc );
+      ball.x += vx;
+      vx *= friction; // 每次取但前值的 98% ，也就是说 2% 的动力消失。
+      requestAnimationFrame(linear);
+    })();
+  }
+</script>
+</body>
+</html>

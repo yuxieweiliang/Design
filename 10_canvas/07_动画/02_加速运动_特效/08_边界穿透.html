@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>加速</title>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script src="./ball.js"></script>
+<script>
+  window.onload = function () {
+    var oCanvas = document.querySelector("#canvas"),
+      oGc = oCanvas.getContext('2d'),
+      width = oCanvas.width, height = oCanvas.height,
+      ball = new Ball(100, height / 2),
+      ball2 = new Ball(100, height / 2);
+      ball.fill(oGc);
+      ball2.fill(oGc);
+
+      var checkBorder = {
+        // 向左
+        37: () => {
+          if(ball.x < -ball.radius) {
+            ball.x = ball2.x;
+          }
+          if (ball.x < ball.radius && ball2.x === ball.x) {
+            ball2.x = width + ball2.radius;
+          }
+        },
+        // 向上
+        38: () => {
+          if (ball.y < -ball.radius) {
+            ball.y = ball2.y;
+          }
+          if (ball.y < ball.radius && ball2.y === ball.y) {
+            ball2.y = width + ball2.radius;
+          }
+        },
+        // 向右
+        39: () => {
+          if(ball.x > width + ball.radius) {
+            ball.x = ball2.x;
+          }
+          if (ball.x > width - ball.radius && ball2.x === ball.x) {
+            ball2.x = -ball2.radius;
+          }
+        },
+        // 向下
+        40: () => {
+          if(ball.y > height + ball.radius) {
+            ball.y = ball2.y;
+          }
+          if (ball.y > height - ball.radius && ball2.y === ball.y) {
+            ball2.y = -ball2.radius;
+          }
+        },
+      }
+
+    addEventListener("keydown", function (ev) {
+      var oEvent = ev || event;
+      if(oEvent.keyCode >= 37 && oEvent.keyCode <= 40) {
+        oGc.clearRect(0, 0, width, height);
+        ({
+          37: (speed) => {ball.x -= speed; ball2.x -= speed},
+          38: (speed) => {ball.y -= speed; ball2.y -= speed},
+          39: (speed) => {ball.x += speed; ball2.x += speed},
+          40: (speed) => {ball.y += speed; ball2.y += speed}
+        })[oEvent.keyCode](15)
+
+        checkBorder[oEvent.keyCode]();
+        // 小球是否在边界
+        ball.fill(oGc);
+        ball2.fill(oGc);
+      }
+    }, false);
+  }
+</script>
+</body>
+</html>
