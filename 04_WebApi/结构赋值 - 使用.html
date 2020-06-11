@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+一、添加默认值
+<script>
+  // 为函数添加默认值
+  function logMessage(msg1 = {}, msg2 = {y: 9}) {
+    const { x = 5 } = msg1;
+    const { y } = msg2;
+    console.log(x, y);
+  }
+
+  logMessage(); // 打印： 5, 9
+
+  logMessage({}, {}); // 打印： 5, undefined
+
+  logMessage({x: 3}, {y: 4}); // 打印： 3, 4
+
+</script>
+二、解构赋值
+<script>
+  var defA = 1, devB = 2, defC = 3;
+
+  function createDef(A, B, C) {
+    var a, b, c;
+    // 需要只用一行代码，为 a, b, c 赋值
+    ({A: a, B: b, C: c} = { A, B, C }); // 还可以 ([a, b, c] = arguments);
+    return (a + b) * c
+  }
+  const countVal = createDef(defA, devB, defC);
+
+  // 打印出 9
+  console.log(countVal)
+</script>
+
+三、 默认值
+<script>
+  const DEFAULT = {
+    options: {
+      remove: true,
+      enable: false,
+      instance: {}
+    },
+    log: {
+      warn: true,
+      error: true
+    }
+  };
+
+  /**
+   * 修改这个函数，用最优雅的方式实现
+   * 将 defaults 作为 options 的默认值。
+   * 你可以多复制几个文件，将你能想到的所有方式都写一遍。
+   * @returns {}
+   */
+  function crateDef() {
+    const config = {
+      options: {
+        remove: false,
+        instance: null
+      }
+    };
+
+    const {
+      options: {
+        remove = DEFAULT.options.remove,
+        enable = DEFAULT.options.enable,
+        instance = DEFAULT.options.instance
+      },
+      log = DEFAULT.log
+    } = config;
+
+    return { options: { remove, enable, instance }, log }
+  }
+
+  const config = crateDef();
+
+  // 打印出 false
+  console.log(config.options.remove);
+
+  // 打印出 null
+  console.log(config.options.instance);
+
+  // 打印出 false
+  console.log(config.options.enable);
+
+  // 打印出 true
+  console.log(config.log.warn);
+
+  // 打印出 true
+  console.log(config.log.error)
+
+</script>
+</body>
+</html>

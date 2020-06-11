@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  var obj = {m: 2, n: 2};
+  function add(a, b) {
+    console.log(`${this.m * a} + ${this.n * b}`)
+  }
+
+  var add1 = add.bind(obj, 1, 1)();
+
+  var add2 = add.bind(obj)(2, 2);
+
+  var add3 = add.bind(obj, 1)(2);
+
+  var add4 = add.call(obj, 1, 1);
+
+  var add5 = add.call(obj, ...[2, 2]);
+
+  var add6 = add.apply(obj, [1, 1]);
+
+
+  function Parent(a) {
+    this.a = a;
+  }
+  var par = new Parent(1);
+  console.log(par.constructor);
+
+  function Child(b) {
+    Parent.call(this);
+    this.b = b
+  }
+  Child.prototype = Object.create(Parent.prototype);
+  var child = new Child('b');
+  child.constructor = Child;
+  console.log(child);
+  console.log(child.constructor);
+  console.log(new child.__proto__.constructor);
+
+  var worker = new Worker('worker.js');
+  function createWorker() {
+
+    worker.postMessage('Work done!');
+    worker.onmessage = function (event) {
+      console.log('Received message ' + event.data);
+      doSomething();
+    };
+
+    function doSomething() {
+      console.log('-------');
+      // 执行任务
+      worker.postMessage('Work done!');
+      // 关闭线程
+    }
+    setTimeout(createWorker, 1000)
+  }
+  createWorker();
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

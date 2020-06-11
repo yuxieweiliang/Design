@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .root {
+      height: 2500px;
+      width: 1000px;
+    }
+    .top {
+      height: 500px;
+      width: 100px;
+    }
+    .child {
+      width: 100px;
+      height: 100px;
+      position: sticky;
+      top: 10px;
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<div class="root">
+  <div class="top"></div>
+  <div class="child"></div>
+</div>
+
+<script>
+  const o = {
+    f1: function () {
+      console.log(this);
+      const f2 = (function() {
+        console.log(this);
+      })();
+    }
+  }
+
+  o.f1()
+  var d = new Date();
+  d.getTime() // 1481869925657
+
+
+  function findMax(arr) {
+    return Math.max.apply(null, arr)
+  }
+
+  console.log(findMax([10, 2, 4, 15, 9]))
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  const DEFAULT = {
+    options: {
+      remove: true,
+      enable: false,
+      instance: {}
+    },
+    log: {
+      warn: true,
+      error: true
+    }
+  };
+
+  /**
+   * 修改这个函数，用最优雅的方式实现
+   * 将 defaults 作为 options 的默认值。
+   * 你可以多复制几个文件，将你能想到的所有方式都写一遍。
+   * @returns {}
+   */
+  function crateDef() {
+    const config = {
+      options: {
+        remove: false,
+        instance: null
+      }
+    };
+
+    return config
+  }
+
+  const config = crateDef();
+
+  // 打印出 false
+  console.log(config.options.remove);
+
+  // 打印出 null
+  console.log(config.options.instance);
+
+  // 打印出 false
+  console.log(config.options.enable);
+
+  // 打印出 true
+  console.log(config.log.warn);
+
+  // 打印出 true
+  console.log(config.log.error)
+
+</script>
+</body>
+</html>
