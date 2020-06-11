@@ -1,14 +1,8 @@
-var Class = function(parent) {
+(function (exports) {
+
     var klass = function () {
         this.init.apply(this, arguments);
     };
-
-    if (parent) {
-        var subClass = function () {
-        };
-        subClass.prototype = parent.prototype;
-        klass.prototype = new subClass;
-    }
 
     klass.prototype.init = function () {};
     // 定义prototype别名
@@ -50,50 +44,68 @@ var Class = function(parent) {
         }
 
         if (included) included(klass)
-
     };
 
-    // 给实例添加属性 也就是原型上的方法
-    klass.create = function (obj) {
-        var createApi = obj.createApi;
 
+    klass.fn.setData = function (obj) {
+        this.data = klass.data || {};
+
+        for (var key in obj) {
+
+            this.data[key] = obj[key];
+        }
+    };
+
+
+    // 给实例添加属性 也就是原型上的方法
+    /*klass.create = function (obj) {
         // 创建一个函数保存一下当前状态。
         var create = function (key, i, func) {
 
             if (typeof func === 'function') {
 
                 klass.fn[key][i] = function () {
-
                     return func.apply(klass.fn, arguments);
                 };
             } else {
-
                 klass.fn[key][i] = func;
             }
         };
 
         // 循环obj， 将所有的东西加载到原型上
         for (var key in obj) {
+            const _key = key.toLowerCase();
+            if (_key === 'methods') {
+                for (var i in obj[key]) {
+                    create(key, i, obj[key][i])
+                }
+            } else {
+                klass.fn.methods[key] = obj[key];
+            }
 
+            console.log(key)
             klass.fn[key] = klass.fn[key] || {};
 
-            for (var i in obj[key]) {
+            /!*for (var i in obj[key]) {
                 create(key, i, obj[key][i])
-            }
+            }*!/
         }
-        if (createApi) createApi(klass)
+    };*/
 
+    klass.initMixin = function (func) {
+        if (typeof func === 'function') {
+            func (klass)
+        }
     };
 
-    klass.fn.setData = function (obj) {
-        klass.fn.data = klass.fn.data || {};
+    exports.Class = function(parent) {
 
-        for (var key in obj) {
-
-            klass.fn.data[key] = obj[key];
+        if (parent) {
+            var subClass = function () {};
+            subClass.prototype = Object.assign(klass.prototype, parent.prototype);
+            klass.__proto__ = new subClass;
         }
-        console.log(klass.fn);
-    };
 
-    return klass;
-};
+        return klass;
+    };
+})(window);

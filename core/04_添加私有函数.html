@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn">btn</button>
+<!--<script src="../../jquery.min.js"></script>-->
+<script src="core.js"></script>
+<script src="./PubSub.js"></script>
+<script src="./type.js"></script>
+<script src="./common.js"></script>
+<script>
+  function getUser() {
+    console.log(this);
+    return this
+  }
+
+
+  /*Person.create({
+    api: {
+      getUser: getUser
+    },
+    config: {
+      http: 'http://www.baidu.com'
+    }
+  });
+  Person.create({
+    method: {
+      toString: function(){
+        console.log('toString')
+      }
+    }
+  });*/
+  var Child = new Class(Person);
+
+  Child.include({
+    init: function(){
+      this.setData({
+        a: 'a',
+        b: 'b'
+      });
+      // this.method.toString();
+      // this.api.getUser();
+
+    },
+    other () {
+
+    }
+  });
+  child = new Child();
+  child.setData({
+    a: 'a',
+    b: 'b'
+  });
+
+  function isProxy (sbs) {
+    console.log('---------', this, sbs)
+  }
+
+  console.log(child);
+  child.proxy(isProxy)('xxxx');
+
+
+  //  $('#btn').click(child.proxy(child.click));
+
+
+  child.on(TYPE.LOGIN, function (data) {
+    console.log(data)
+  });
+
+
+  child.emit(TYPE.LOGIN, {a: 'a', b: 'b'})
+
+
+</script>
+</body>
+</html>

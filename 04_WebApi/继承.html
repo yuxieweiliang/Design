@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Parent(a) {
+        this.a = a;
+    }
+    var par = new Parent(1);
+    console.log(par.constructor);
+
+    function Child(b) {
+        Parent.call(this);
+        this.b = b
+    }
+    Child.prototype = Object.create(Parent.prototype);
+    var child = new Child('b');
+    child.constructor = Child;
+    console.log(child);
+    console.log(child.constructor);
+    console.log(new child.__proto__.constructor);
+</script>
+</body>
+</html>

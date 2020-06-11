@@ -1,0 +1,3 @@
+function mixinData(klass) {
+    
+}

@@ -6,7 +6,7 @@
 </head>
 <body>
 <button id="btn">btn</button>
-<script src="../../jquery.min.js"></script>
+<script src="../../bower_components/jQuery/dist/jquery.js"></script>
 <script src="./01_发布者模式.js"></script>
 <script>
 
@@ -14,11 +14,13 @@ var ABC = {
   sub: 'ABC:sub'
 };
 
-PubSub.subscribe(ABC.sub, function(aaa) {
+PubSub.on(ABC.sub, function(aaa) {
   console.log(aaa)
-});
+}).on(ABC.sub, function(aaa) {
+  console.log(aaa)
+}).emit(ABC.sub, 'bbbb');
 
-PubSub.publish(ABC.sub, 'bbbb')
+console.log(PubSub.emit('ABC.sub', 'ccc'))
 
 </script>
 </body>
