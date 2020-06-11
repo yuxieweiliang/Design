@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>加速</title>
+  <style>
+    #canvas {
+      border: 1px dashed #aaa;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas" width="1200" height="600"></canvas>
+<br>
+加速运动就是让其中一个速度不断递增<br>
+
+匀速：<br>
+var speed = 10;<br>
+加速：<br>
+var accelerate = .2;<br>
+<br>
+递加：<br>
+speed += accelerate<br>
+<br>
+赋值：<br>
+motion += speed<br>
+
+<script src="./ball.js"></script>
+<script>
+  window.onload = function () {
+    var oCanvas = document.querySelector("#canvas"),
+      oGc = oCanvas.getContext('2d'),
+      width = oCanvas.width, height = oCanvas.height,
+      ball = new Ball( 0, 0 ),
+      a = 0.3,
+      ax = a * Math.cos( 25 * Math.PI / 180 ),
+      ay = a * Math.sin( 25 * Math.PI / 180 ),
+      vx = 0,
+      vy = 0;
+    (function linear() {
+      oGc.clearRect(0, 0, width, height);
+      ball.fill( oGc );
+      ball.x += vx;
+      ball.y += vy;
+      vx += ax;
+      vy += ay;
+      requestAnimationFrame(linear);
+    })();
+  }
+</script>
+</body>
+</html>

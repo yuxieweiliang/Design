@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>加速</title>
+</head>
+<body>
+<canvas id="canvas" width="1900" height="1000"></canvas>
+<br>
+匀速抛物线
+抛物线运动的核心就是，让其中一个值，先增加，在减少<br>
+
+<script src="./ball.js"></script>
+<script>
+  window.onload = function () {
+    var oCanvas = document.querySelector("#canvas"),
+      oGc = oCanvas.getContext('2d'),
+      width = oCanvas.width, height = oCanvas.height,
+      ball = new Ball( 0, height / 2 ),
+      vy = -10,
+      vx = 5,
+      gravity = 0.2, as = .0015;
+    (function linear() {
+      oGc.clearRect(0, 0, width, height);
+      ball.fill( oGc );
+      ball.y += vy;    // y从 负值 到 0 再到 正值
+      ball.x += vx;
+      gravity -= as;
+      vy += gravity;
+      requestAnimationFrame(linear);
+    })();
+  }
+</script>
+</body>
+</html>
