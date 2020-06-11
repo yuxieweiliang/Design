@@ -16,11 +16,19 @@ Person.extend({
 Person.include(PubSub);
 Person.include({
     init() {
-        this.Person = 'Person'
+        this.Person = 'Person';
     },
     save: function(){},
-    destroy: function(){},
-    click: function() {
-        // this.elem.click(this.proxy(this.click));
-    }
+    destroy: function(){}
+});
+
+Person.initMixin(function (klass) {
+    klass.fn.setData = function (obj) {
+        this.data = klass.data || {};
+
+        for (var key in obj) {
+
+            this.data[key] = obj[key];
+        }
+    };
 });
