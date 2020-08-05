@@ -1,11 +1,9 @@
+/* var Class = */(function(exports) {
 
-var Class = (function(exports) {
-
-<<<<<<< HEAD
   exports.Class = function(parent) {
-=======
-  return function(parent) {
->>>>>>> 0d641df622e8c04a9eb51656083ac9b417f48166
+  //}
+  //return function(parent) {
+
     var klass = function() {
       this.init.apply(this, arguments);
     };
