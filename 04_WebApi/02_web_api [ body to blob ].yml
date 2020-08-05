@@ -1,6 +1,9 @@
-// Current blob size limit is around 500MB for browsers
-var downloadResource = function (url, filename) {
+# Current blob size limit is around 500MB for browsers
+
+function downloadResource(url, filename) {
+
   if (!filename) filename = url.split('\\').pop().split('/').pop();
+
   fetch(url, {
     headers: new Headers({
       'Origin': location.origin
@@ -14,7 +17,6 @@ var downloadResource = function (url, filename) {
     a.download = filename;
     a.href = blobUrl;
     a.click();
-
   })
   .catch(e => console.error(e));
 }

@@ -7,15 +7,20 @@
 <body>
 <button id="btn">btn</button>
 <!--<script src="../../jquery.min.js"></script>-->
+<<<<<<< HEAD
 <!--<script src="../../bower_components/jquery/dist/jquery.min.js"></script>-->
+=======
+<script src="../../bower_components/jQuery/dist/jquery.js"></script>
+>>>>>>> 9cd1da4e099dcfa814b8f79bcfddeddb067da7f9
 <script src="./04_添加私有函数.js"></script>
 <script>
 
-  var Person = new Class;
+  var Person = Class();
 
 
   function getUser() {
     console.log(this)
+    return this
   }
 
 
@@ -54,7 +59,7 @@
   var Child = new Class(Person);
 
   Child.include({
-    init: function(){
+/*    init: function(){
       this.setData({
         a: 'a',
         b: 'b'
@@ -63,10 +68,11 @@
       this.api.getUser();
 
       console.log(this)
-    }
+    }*/
   });
 
   var abc = new Person()
+  /*var abc = new Person()
   console.log(abc)
 
   /*let Child = new Class(Person);
@@ -76,10 +82,23 @@
     }
   })
   child = new Child();
-  console.log(child)*/
+  console.log(child)
+  })*/
+  child = new Child();
+  child.setData({
+    a: 'a',
+    b: 'b'
+  });
+
+  child.proxy(function () {
+    console.log('---------', this)
+  });
+
+
+  console.log(child)
+  console.log(child.api.getUser())
 
   //  $('#btn').click(child.proxy(child.click));
-
 
 </script>
 </body>

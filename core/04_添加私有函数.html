@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="btn">btn</button>
+<!--<script src="../../jquery.min.js"></script>-->
+<script src="../bower_components/jQuery/dist/jquery.js"></script>
+<script src="core.js"></script>
+<script src="./PubSub.js"></script>
+<script src="./type.js"></script>
+<script src="./common.js"></script>
+<script>
+  function getUser() {
+    console.log(this);
+    return this
+  }
+
+
+  /*Person.create({
+    api: {
+      getUser: getUser
+    },
+    config: {
+      http: 'http://www.baidu.com'
+    }
+  });
+  Person.create({
+    method: {
+      toString: function(){
+        console.log('toString')
+      }
+    }
+  });*/
+  var Child = new Class(Person);
+
+  Child.include({
+    init: function(){
+      this.setData({
+        a: 'a',
+        b: 'b'
+      });
+      // this.method.toString();
+      // this.api.getUser();
+
+      this.on(TYPE.LOGIN, this.proxy(this.click))
+
+    },
+    click: function() {
+      //
+      console.log('login: => ', this)
+    },
+    other () {
+      console.log('other: => ', this)
+    }
+  });
+  child = new Child();
+  child.setData({
+    a: 'a',
+    b: 'b'
+  });
+
+  console.log(child);
+
+  $('#btn').click(child.proxy(child.other));
+
+  child.emit(TYPE.LOGIN, {a: 'a', b: 'b'});
+
+
+</script>
+</body>
+</html>
