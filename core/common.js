@@ -23,12 +23,17 @@ Person.include({
 });
 
 Person.initMixin(function (klass) {
-    klass.fn.setData = function (obj) {
-        this.data = klass.data || {};
+    klass.fn.setStore = function (obj) {
+        Person.__data = Person.__data || {};
 
         for (var key in obj) {
-
-            this.data[key] = obj[key];
+            Person.__data[key] = obj[key];
         }
+        return this
+    };
+    klass.fn.getStore = function (key) {
+        return key ? Person.__data[key] : Person.__data
     };
 });
+
+console.log(Person.find);

@@ -20,10 +20,10 @@
         klass.fn = klass.prototype;
 
         // 添加一个委托函数，更改函数的上下文。
-        klass.proxy = function (func) {
+        klass.proxy = function (func, ctx) {
             var _this = this;
             return (function () {
-                return func.apply(_this, arguments)
+                return func.apply(_this, [ctx].concat(Array.from(arguments)))
             })
         };
         klass.fn.proxy = klass.proxy;

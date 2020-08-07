@@ -2,7 +2,7 @@ var PubSub = {
   // subscribe
   on: function(ev, callback) {
     // 创建 _callbacks 对象， 除非它已经存在
-    var calls = this.__cbs || (this.__cbs = {});
+    var calls = this.__cbs || (this.__cbs = {name: '监听事件集合。'});
 
     (calls[ev] || (calls[ev] = [])).push(callback);
     return this
