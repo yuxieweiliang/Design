@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    "use strict"
+    const object1 = {
+        val1: {}
+    };
+
+
+    function createDefault (obj, type, props) {
+        Object.defineProperty(obj, type, {
+            value: props,
+            writable: false
+        });
+    }
+
+    createDefault(object1, 'property1', {adsa: 432432});
+    object1.property1.b = 'xxx';
+    object1.property1 = 'xxx';
+    console.log(object1)
+</script>
+</body>
+</html>

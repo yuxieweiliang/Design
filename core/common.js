@@ -22,11 +22,14 @@ Person.include({
     destroy: function(){}
 });
 
-Person.initMixin(function (klass) {
+Person.mixin(function (klass) {
     klass.fn.setStore = function (obj) {
         Person.__data = Person.__data || {};
+        this.__data = this.__data || {};
 
+        console.log('__data', this.__data);
         for (var key in obj) {
+            this.__data[key] = obj[key];
             Person.__data[key] = obj[key];
         }
         return this
@@ -36,4 +39,3 @@ Person.initMixin(function (klass) {
     };
 });
 
-console.log(Person.find);

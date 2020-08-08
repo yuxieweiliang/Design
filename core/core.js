@@ -55,9 +55,9 @@
         };
 
 
-        klass.initMixin = function (func) {
+        klass.mixin = function (func) {
             if (typeof func === 'function') {
-                func (klass)
+                func.call (this, klass)
             }
         };
 
