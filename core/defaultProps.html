@@ -6,20 +6,20 @@
 </head>
 <body>
 <script>
-    "use strict"
+    "use strict";
     const object1 = {
         val1: {}
     };
 
 
-    function createDefault (obj, type, props) {
+    function createDefine (obj, type, value, writable = false) {
         Object.defineProperty(obj, type, {
-            value: props,
-            writable: false
+            value,
+            writable
         });
     }
 
-    createDefault(object1, 'property1', {adsa: 432432});
+    createDefine(object1, 'property1', {adsa: 432432});
     object1.property1.b = 'xxx';
     object1.property1 = 'xxx';
     console.log(object1)

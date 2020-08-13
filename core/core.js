@@ -54,6 +54,12 @@
             if (included) included(klass)
         };
 
+        klass.createDefine = function (obj, type, value, writable = false) {
+            Object.defineProperty(obj, type, {
+                value,
+                writable
+            });
+        };
 
         klass.mixin = function (func) {
             if (typeof func === 'function') {

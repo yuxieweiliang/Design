@@ -23,13 +23,10 @@ Person.include({
 });
 
 Person.mixin(function (klass) {
-    klass.fn.setStore = function (obj) {
-        Person.__data = Person.__data || {};
-        this.__data = this.__data || {};
+    klass.createDefine(Person, '__data', {});
 
-        console.log('__data', this.__data);
+    klass.fn.setStore = function (obj) {
         for (var key in obj) {
-            this.__data[key] = obj[key];
             Person.__data[key] = obj[key];
         }
         return this
