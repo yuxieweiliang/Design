@@ -1,5 +1,3 @@
-
-
 function YaPeople() {}
 YaPeople.prototype = {
   shuo: function () {

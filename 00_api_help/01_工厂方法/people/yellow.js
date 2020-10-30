@@ -1,4 +1,3 @@
-
 function YellowPeople() {}
 YellowPeople.prototype = {
   shuo: function () {

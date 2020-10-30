@@ -1,4 +1,3 @@
-
 function WhitePeople() {}
 WhitePeople.prototype = {
   shuo: function () {
