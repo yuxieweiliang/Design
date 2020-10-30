@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>class new and not new</title>
+</head>
+<body>
+
+function obj(name) {
+  [...1...]
+}
+
+obj.[...2...] = "name2";
+
+var a = obj("name1");
+
+var b = new obj;
+
+a.name
+-> 'name1'
+
+b.name
+-> 'name2'
+
+<script>
+  function obj(name) {
+    if (this instanceof obj) {
+
+    } else {
+      return {
+        name
+      }
+    }
+  }
+
+  obj.prototype.name = "name2";
+
+  var a = obj("name1");
+
+  var b = new obj;
+
+</script>
+</body>
+</html>
